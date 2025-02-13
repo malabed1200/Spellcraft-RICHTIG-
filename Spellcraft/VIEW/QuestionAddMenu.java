@@ -15,7 +15,7 @@ public class QuestionAddMenu extends JFrame {
 
         // Hintergrundpanel hinzufügen
         //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Bilder/Background_Dirt.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Spellcraft-RICHTIG-\\Spellcraft\\Bilder\\Background_Dirt.png");
         backgroundPanel.setLayout(null); // Absolute Positionierung
         setContentPane(backgroundPanel);
 
@@ -31,7 +31,6 @@ public class QuestionAddMenu extends JFrame {
         // Erstellen des Textfeldes & JLabels
         CustomTextField textFieldQ = new CustomTextField();
         backgroundPanel.add(textFieldQ);
-        CustomLabel Label= new CustomLabel("Hallo");
 
         // Erstellen des Textfeldes & JLabels
         CustomTextField textFieldA = new CustomTextField();
