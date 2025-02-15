@@ -15,7 +15,7 @@ public class QuestionRemoveMenu extends JFrame {
 
         // Hintergrundpanel hinzufügen
         //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Spellcraft/Bilder/Background_Dirt.png");
         backgroundPanel.setLayout(null); // Absolute Positionierung
         setContentPane(backgroundPanel);
 
