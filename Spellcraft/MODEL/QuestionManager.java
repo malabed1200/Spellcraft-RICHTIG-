@@ -12,7 +12,7 @@ class QuestionManager {
 
     public void loadQuestions() {
         // Hier könnten Fragen aus einer Datei geladen werden
-        // da kann man die fragen und richtige Antworts einlesen und 
+        // da kann man die fragen und richtige Antworts einlesen und speichern
         questions.add(new Question("Wie schreibt man das Wort 'Katze'?", "Katze"));
         questions.add(new Question("Was ist die Hauptstadt von Deutschland?", "Berlin"));
     }
