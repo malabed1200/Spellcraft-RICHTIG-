@@ -4,6 +4,7 @@ import java.util.List;
 
 // Klasse zur Verwaltung einzelner Fragen
 class Question {
+
     private String questionText;
     private String answer;
 

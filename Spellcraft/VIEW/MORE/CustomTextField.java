@@ -1,45 +1,59 @@
 package VIEW.MORE;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTextFieldUI;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
 public class CustomTextField extends JTextField {
-    public CustomTextField(){
-        // Erstelle ein JTextField mit Anpassungen
-        setBackground(Color.BLACK); // Hintergrundfarbe
-        setForeground(Color.GRAY);  // Textfarbe
-        setCaretColor(Color.WHITE); // Cursorfarbe
+    private final String placeholder;
 
-        // Versuche, eine benutzerdefinierte Schriftart zu laden
+    public CustomTextField(String placeholder) {
+        super();
+        this.placeholder = placeholder;
+
+        setForeground(Color.WHITE); // Normale Textfarbe
+        setBackground(Color.BLACK); // Hintergrundfarbe
+        setCaretColor(Color.WHITE); // Cursorfarbe
+        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2)); // Randfarbe
+
+        // Benutzerdefinierte Schriftart laden
         try {
-            // Ändere den Pfad zu deiner Schriftart-Datei
             String fontPath = "Font/Minecraft-Regular.otf";
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(18f); // Schriftgröße 18
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(18f);
             setFont(customFont);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            // Fallback auf Standard-Schriftart
-            setFont(new Font("Arial", Font.PLAIN, 18));
+            setFont(new Font("Arial", Font.PLAIN, 18)); // Fallback-Schriftart
         }
 
-        // Lege Padding (Abstände) fest
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+        setUI(new CustomTextFieldUI());
     }
 
+    private class CustomTextFieldUI extends BasicTextFieldUI {
+        @Override
+        protected void paintSafely(Graphics g) {
+            super.paintSafely(g);
+            if (getText().isEmpty()) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(Color.GRAY); // Placeholder-Farbe
+                g2.setFont(getFont().deriveFont(Font.PLAIN));
+                g2.drawString(placeholder, getInsets().left, getHeight() / 2 + getFont().getSize() / 2 - 3);
+            }
+        }
+    }
 
-    //TEST methode
+    // TEST Methode
     public static void main(String[] args) {
-        // Erstelle ein JFrame, um das Textfeld anzuzeigen
         JFrame frame = new JFrame("Custom TextField Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
         frame.setLayout(new BorderLayout());
 
         // CustomTextField hinzufügen
-        CustomTextField textField = new CustomTextField();
+        CustomTextField textField = new CustomTextField("Suche oder Webadresse eingeben");
         frame.add(textField, BorderLayout.CENTER);
 
         // Frame sichtbar machen
