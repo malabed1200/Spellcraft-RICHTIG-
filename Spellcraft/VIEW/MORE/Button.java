@@ -10,7 +10,7 @@ public class Button {
     private Font loadMinecraftFont() {
         try {
             // Der Pfad zur Schriftart-Datei auf deinem Computer
-            File fontFile = new File("Font/Minecraft-Regular.otf");
+            File fontFile = new File("Spellcraft/Font/Minecraft-Regular.otf");
             Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
             return font.deriveFont(Font.PLAIN, 20); // Schriftgröße auf 20 setzen
         } catch (Exception e) {

@@ -12,7 +12,7 @@ class CustomLabel extends JLabel {
 
         // Benutzerdefinierte Schriftart laden
         try {
-            String fontPath = "Font/Minecraft-Regular.otf"; // Pfad zur Schriftart
+            String fontPath = "Spellcraft/Font/Minecraft-Regular.otf"; // Pfad zur Schriftart
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontPath)).deriveFont(18f);
             setFont(customFont);
         } catch (FontFormatException | IOException e) {

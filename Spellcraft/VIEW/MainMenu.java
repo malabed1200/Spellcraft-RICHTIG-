@@ -16,7 +16,7 @@ public class MainMenu extends JFrame {
 
         // Hintergrundpanel hinzufügen
         //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Bilder/Main_Menu.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Main_Menu.png");
         backgroundPanel.setLayout(null); // Absolute Positionierung
         setContentPane(backgroundPanel);
 
