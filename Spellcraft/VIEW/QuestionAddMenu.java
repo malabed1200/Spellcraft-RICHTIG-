@@ -7,7 +7,7 @@ import javax.swing.*;
 public class QuestionAddMenu extends JFrame {
 
     public QuestionAddMenu() {
-        // Erstelle das Hauptfenster
+        // Erstelle das Hauptfenster<
         setTitle("Add Question");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
