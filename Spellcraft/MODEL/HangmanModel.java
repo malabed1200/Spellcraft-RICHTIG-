@@ -1,56 +1,61 @@
 package MODEL;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
+// Model: Enthält die Spiellogik
 public class HangmanModel {
-    private String word;
-    private Set<Character> guessedLetters;
-    private int attemptsLeft;
-
-    public HangmanModel(String word) {
-        this.word = word.toLowerCase();
-        this.guessedLetters = new HashSet<>();
-        this.attemptsLeft = 6;
-    }
-
-    public boolean guessLetter(char letter) {
-        if (guessedLetters.contains(letter)) {
-            return false;
-        }
-        guessedLetters.add(letter);
-        if (!word.contains(Character.toString(letter))) {
-            attemptsLeft--;
-        }
-        return true;
-    }
-
-    public boolean isGameOver() {
-        return attemptsLeft <= 0 || isWordGuessed();
-    }
-
-    public boolean isWordGuessed() {
-        for (char c : word.toCharArray()) {
-            if (!guessedLetters.contains(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    private final String word = "PANDA";
+    private final Set<Character> guessedLetters = new HashSet<>();
+    private int wrongGuesses = 0;
 
     public String getMaskedWord() {
         StringBuilder maskedWord = new StringBuilder();
         for (char c : word.toCharArray()) {
-            maskedWord.append(guessedLetters.contains(c) ? c : '_').append(' ');
+            if (guessedLetters.contains(c)) {
+                maskedWord.append(c).append(" ");
+            } else {
+                maskedWord.append("_ ");
+            }
         }
         return maskedWord.toString().trim();
     }
 
-    public int getAttemptsLeft() {
-        return attemptsLeft;
+    public boolean guessLetter(char letter) {
+        if (word.contains(String.valueOf(letter))) {
+            guessedLetters.add(letter);
+            return true;
+        } else {
+            wrongGuesses++;
+            return false;
+        }
+    }
+
+    public boolean isGameOver() {
+        return wrongGuesses >= 6 || getMaskedWord().replace(" ", "").equals(word);
+    }
+
+    public boolean isWin() {
+        return getMaskedWord().replace(" ", "").equals(word);
+    }
+
+    public void resetGame() {
+        guessedLetters.clear();
+        wrongGuesses = 0;
+    }
+
+    public int getWrongGuesses() {
+        return wrongGuesses;
+    }
+
+    public String getWord() {
+        return word;
     }
 }
-

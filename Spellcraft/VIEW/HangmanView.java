@@ -1,59 +1,115 @@
 package VIEW;
-import MODEL.HangmanModel;
 
-import java.util.HashSet;
-import java.util.Set;
+import MODEL.HangmanModel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
-public class HangmanView {
-    private JFrame frame;
-    private JLabel wordLabel;
-    private JLabel attemptsLabel;
-    private JTextField inputField;
-    private JButton guessButton;
+// View: Stellt die GUI dar
+public class HangmanView extends JFrame {
+    private JLabel wordLabel, categoryLabel;
+    private JPanel keyboardPanel;
+    private HangmanPanel hangmanPanel;
+    private ImageIcon background;
+    private JButton menuButton;
     private HangmanModel model;
 
     public HangmanView(HangmanModel model) {
         this.model = model;
-        frame = new JFrame("Hangman Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(4, 1));
+
+        setTitle("Hangman Game");
+        setSize(800, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        background = new ImageIcon("/mnt/data/image.png");
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        categoryLabel = new JLabel("ANIMALS", SwingConstants.CENTER);
+        categoryLabel.setOpaque(true);
+        categoryLabel.setBackground(Color.ORANGE);
+        categoryLabel.setForeground(Color.WHITE);
+        categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        topPanel.add(categoryLabel, BorderLayout.CENTER);
+
+        menuButton = new JButton("Menu");
+        menuButton.setFont(new Font("Arial", Font.BOLD, 14));
+        menuButton.addActionListener(e -> openMenu());
+        topPanel.add(menuButton, BorderLayout.EAST);
+
+        add(topPanel, BorderLayout.NORTH);
 
         wordLabel = new JLabel(model.getMaskedWord(), SwingConstants.CENTER);
-        attemptsLabel = new JLabel("Versuche übrig: " + model.getAttemptsLeft(), SwingConstants.CENTER);
-        inputField = new JTextField();
-        guessButton = new JButton("Rate");
+        wordLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        add(wordLabel, BorderLayout.SOUTH);
 
-        guessButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String text = inputField.getText().toLowerCase();
-                if (text.length() == 1) {
-                    model.guessLetter(text.charAt(0));
-                    updateView();
-                }
-                inputField.setText("");
-            }
-        });
+        hangmanPanel = new HangmanPanel(model);
+        add(hangmanPanel, BorderLayout.CENTER);
 
-        frame.add(wordLabel);
-        frame.add(attemptsLabel);
-        frame.add(inputField);
-        frame.add(guessButton);
+        keyboardPanel = new JPanel(new GridLayout(4, 7));
+        addKeyboard();
+        add(keyboardPanel, BorderLayout.SOUTH);
+    }
 
-        frame.setVisible(true);
+    private void addKeyboard() {
+        for (char c = 'A'; c <= 'Z'; c++) {
+            JButton button = new JButton(String.valueOf(c));
+            button.setFont(new Font("Arial", Font.BOLD, 18));
+            char finalC = c;
+            button.addActionListener(e -> processGuess(finalC, button));
+            keyboardPanel.add(button);
+        }
+    }
+
+    private void processGuess(char letter, JButton button) {
+        boolean correct = model.guessLetter(letter);
+        button.setBackground(correct ? Color.GREEN : Color.RED);
+        button.setEnabled(false);
+        updateView();
+        checkGameStatus();
+    }
+
+    private void checkGameStatus() {
+        if (model.isWin()) {
+            JOptionPane.showMessageDialog(this, "Glückwunsch! Du hast gewonnen!");
+            resetGame();
+        } else if (model.isGameOver()) {
+            JOptionPane.showMessageDialog(this, "Game Over! Das Wort war: " + model.getWord());
+            resetGame();
+        }
+    }
+
+    private void resetGame() {
+        model.resetGame();
+        updateView();
+        resetKeyboard();
+    }
+
+    private void resetKeyboard() {
+        keyboardPanel.removeAll();
+        addKeyboard();
+        keyboardPanel.revalidate();
+        keyboardPanel.repaint();
+    }
+
+    private void openMenu() {
+        JDialog menuDialog = new JDialog(this, "Menu", true);
+        menuDialog.setSize(200, 150);
+        menuDialog.setLayout(new FlowLayout());
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> menuDialog.dispose());
+        menuDialog.add(backButton);
+
+        menuDialog.setLocationRelativeTo(this);
+        menuDialog.setVisible(true);
     }
 
     public void updateView() {
         wordLabel.setText(model.getMaskedWord());
-        attemptsLabel.setText("Versuche übrig: " + model.getAttemptsLeft());
-        if (model.isGameOver()) {
-            JOptionPane.showMessageDialog(frame, model.isWordGuessed() ? "Gewonnen!" : "Verloren! Das Wort war: " + model.getMaskedWord());
-            frame.dispose();
-        }
+        hangmanPanel.repaint();
     }
 }
