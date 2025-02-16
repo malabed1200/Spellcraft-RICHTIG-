@@ -13,6 +13,7 @@ import java.util.Set;
 // Model: Enthält die Spiellogik
 public class HangmanModel {
     private final String word = "PANDA";
+    private final String category = "ANIMALS";
     private final Set<Character> guessedLetters = new HashSet<>();
     private int wrongGuesses = 0;
 
@@ -20,12 +21,12 @@ public class HangmanModel {
         StringBuilder maskedWord = new StringBuilder();
         for (char c : word.toCharArray()) {
             if (guessedLetters.contains(c)) {
-                maskedWord.append(c).append(" ");
+                maskedWord.append(c);
             } else {
-                maskedWord.append("_ ");
+                maskedWord.append("*");
             }
         }
-        return maskedWord.toString().trim();
+        return maskedWord.toString();
     }
 
     public boolean guessLetter(char letter) {
@@ -39,11 +40,11 @@ public class HangmanModel {
     }
 
     public boolean isGameOver() {
-        return wrongGuesses >= 6 || getMaskedWord().replace(" ", "").equals(word);
+        return wrongGuesses >= 6 || getMaskedWord().equals(word);
     }
 
     public boolean isWin() {
-        return getMaskedWord().replace(" ", "").equals(word);
+        return getMaskedWord().equals(word);
     }
 
     public void resetGame() {
@@ -57,5 +58,9 @@ public class HangmanModel {
 
     public String getWord() {
         return word;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

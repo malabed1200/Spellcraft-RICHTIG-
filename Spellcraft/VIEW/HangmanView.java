@@ -28,7 +28,7 @@ public class HangmanView extends JFrame {
         background = new ImageIcon("/mnt/data/image.png");
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        categoryLabel = new JLabel("ANIMALS", SwingConstants.CENTER);
+        categoryLabel = new JLabel("Category: " + model.getCategory(), SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setBackground(Color.ORANGE);
         categoryLabel.setForeground(Color.WHITE);
@@ -44,7 +44,7 @@ public class HangmanView extends JFrame {
 
         wordLabel = new JLabel(model.getMaskedWord(), SwingConstants.CENTER);
         wordLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        add(wordLabel, BorderLayout.SOUTH);
+        add(wordLabel, BorderLayout.NORTH);
 
         hangmanPanel = new HangmanPanel(model);
         add(hangmanPanel, BorderLayout.CENTER);

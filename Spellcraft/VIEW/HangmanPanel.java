@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
 
+
 // HangmanPanel: Zeichnet den Hangman
 class HangmanPanel extends JPanel {
     private HangmanModel model;
@@ -33,12 +34,11 @@ class HangmanPanel extends JPanel {
         g.drawLine(centerX - 20, 180, centerX + 20, 180);
         g.drawLine(centerX + 20, 180, centerX + 20, 210);
 
-        if (model.getWrongGuesses() > 0) g.fillOval(centerX, 210, 35, 35);
-        if (model.getWrongGuesses() > 1) g.drawLine(centerX + 20, 250, centerX + 20, 300);
-        if (model.getWrongGuesses() > 2) g.drawLine(centerX + 20, 260, centerX - 10, 290);
-        if (model.getWrongGuesses() > 3) g.drawLine(centerX + 20, 260, centerX + 50, 290);
-        if (model.getWrongGuesses() > 4) g.drawLine(centerX + 20, 300, centerX - 10, 330);
-        if (model.getWrongGuesses() > 5) g.drawLine(centerX + 20, 300, centerX + 50, 330);
+        if (model.getWrongGuesses() > 0) g.fillOval(centerX, 210, 30, 30);
+        if (model.getWrongGuesses() > 1) g.drawLine(centerX + 15, 240, centerX + 15, 290);
+        if (model.getWrongGuesses() > 2) g.drawLine(centerX + 15, 250, centerX - 20, 280);
+        if (model.getWrongGuesses() > 3) g.drawLine(centerX + 15, 250, centerX + 50, 280);
+        if (model.getWrongGuesses() > 4) g.drawLine(centerX + 15, 290, centerX - 20, 330);
+        if (model.getWrongGuesses() > 5) g.drawLine(centerX + 15, 290, centerX + 50, 330);
     }
 }
-
