@@ -1,7 +1,6 @@
 package VIEW;
 
 import MODEL.HangmanModel;
-import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 
 import javax.swing.*;
@@ -11,8 +10,8 @@ public class HangmanView extends JFrame {
     private JLabel wordLabel, categoryLabel;
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
-    private JButton backButton;
     private HangmanModel model;
+    private JButton backButton;
 
     public HangmanView(HangmanModel model) {
         this.model = model;
@@ -22,48 +21,35 @@ public class HangmanView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Hintergrund als Fullscreen setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Hangman_Hintergrund.jpg");
-        backgroundPanel.setLayout(new BorderLayout());
-        setContentPane(backgroundPanel);
-
-        // Obere Leiste mit Kategorie
+        // Oberer Bereich mit Kategorie und Zurück-Button
         JPanel topPanel = new JPanel(new BorderLayout());
-        categoryLabel = new JLabel("ANIMALS", SwingConstants.CENTER);
+        categoryLabel = new JLabel("ANIMALS - " + model.getMaskedWord(), SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setBackground(Color.ORANGE);
         categoryLabel.setForeground(Color.WHITE);
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(categoryLabel, BorderLayout.CENTER);
 
-        // "Zurück"-Button oben rechts
+        // Zurück-Button oben links
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("Zurück");
-        backButton.setPreferredSize(new Dimension(80, 30));
+        backButton.setPreferredSize(new Dimension(100, 30)); // Kleinere Größe
         backButton.addActionListener(e -> goToMainMenu());
-        topPanel.add(backButton, BorderLayout.EAST);
+        topPanel.add(backButton, BorderLayout.WEST); // Links positionieren
 
-        backgroundPanel.add(topPanel, BorderLayout.NORTH);
+        add(topPanel, BorderLayout.NORTH);
 
-        // Wort-Anzeige direkt unter Kategorie
-        wordLabel = new JLabel(model.getMaskedWord(), SwingConstants.CENTER);
-        wordLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        backgroundPanel.add(wordLabel, BorderLayout.CENTER);
-
-        // Hangman-Zeichnung (fullscreen angepasst)
+        // Hangman-Panel (Zeichnung)
         hangmanPanel = new HangmanPanel(model);
-        backgroundPanel.add(hangmanPanel, BorderLayout.CENTER);
+        add(hangmanPanel, BorderLayout.CENTER);
 
-        // Tastatur füllt gesamten unteren Bereich
-        keyboardPanel = new JPanel(new GridLayout(4, 7, 5, 5)); // Abstände entfernt
-        backgroundPanel.add(keyboardPanel, BorderLayout.SOUTH);
+        // Tastatur unten
+        keyboardPanel = new JPanel(new GridLayout(4, 7));
         addKeyboard();
-
-        setVisible(true);
+        add(keyboardPanel, BorderLayout.SOUTH);
     }
 
     private void addKeyboard() {
-        keyboardPanel.removeAll();
         for (char c = 'A'; c <= 'Z'; c++) {
             JButton button = new JButton(String.valueOf(c));
             button.setFont(new Font("Arial", Font.BOLD, 18));
@@ -71,8 +57,6 @@ public class HangmanView extends JFrame {
             button.addActionListener(e -> processGuess(finalC, button));
             keyboardPanel.add(button);
         }
-        keyboardPanel.revalidate();
-        keyboardPanel.repaint();
     }
 
     private void processGuess(char letter, JButton button) {
@@ -96,16 +80,23 @@ public class HangmanView extends JFrame {
     private void resetGame() {
         model.resetGame();
         updateView();
+        resetKeyboard();
+    }
+
+    private void resetKeyboard() {
+        keyboardPanel.removeAll();
         addKeyboard();
+        keyboardPanel.revalidate();
+        keyboardPanel.repaint();
     }
 
     private void goToMainMenu() {
         this.dispose();
-        new MainMenu();
+        new MainMenu(); // Hauptmenü öffnen
     }
 
     public void updateView() {
-        wordLabel.setText(model.getMaskedWord());
+        categoryLabel.setText("ANIMALS - " + model.getMaskedWord());
         hangmanPanel.repaint();
     }
 }
