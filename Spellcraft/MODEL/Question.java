@@ -20,4 +20,9 @@ class Question {
     public boolean checkAnswer(String input) {
         return input.equals(answer);
     }
+
+    public String getData(){
+        String data="&???"+questionText+"???"+"!!!"+answer+"!!!&";
+        return data;
+    }
 }
