@@ -8,10 +8,10 @@ import MODEL.Statistics;
 import javax.swing.*;
 
 public class MainMenu extends JFrame {
-    private Statistics statistics; // Statistik-Objekt speichern
+    private Statistics statistics;
 
     public MainMenu(Statistics statistics) {
-        this.statistics = statistics; // Speichern der Statistik
+        this.statistics = statistics;
 
         // Hauptfenster
         setTitle("SPELLCRAFT");
@@ -48,19 +48,19 @@ public class MainMenu extends JFrame {
         // ActionListener für Play
         playButton.addActionListener(e -> {
             dispose();
-            new PlayMenuModel();
+            new PlayMenuModel(statistics);
         });
 
-        // ActionListener für Stats
+        // ActionListener für Stats → Statistik-Fenster öffnen
         statsButton.addActionListener(e -> {
             dispose();
-            new StatisticsView(statistics); // Statistik an StatisticsView übergeben
+            new StatisticsView(statistics);
         });
 
-        // ActionListener für Options
+        // ActionListener für Options → Options-Menü öffnen
         optionsButton.addActionListener(e -> {
             dispose();
-            new OptionsMenu();
+            new OptionsMenu(statistics);
         });
 
         setVisible(true);

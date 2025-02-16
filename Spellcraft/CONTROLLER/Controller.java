@@ -5,10 +5,10 @@ import VIEW.MainMenu;
 
 public class Controller {
     public static void main(String[] args) {
-        // Erstellt eine Instanz von Statistics
+        // Erstelle die Statistik-Instanz
         Statistics statistics = new Statistics();
 
-        // Startet das Hauptmenü und übergibt die Statistik-Instanz
+        // Starte das Hauptmenü mit Statistik-Daten
         new MainMenu(statistics);
     }
 }

@@ -3,16 +3,17 @@ package MODEL;
 import VIEW.HangmanView;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
-import MODEL.Question;
-import MODEL.QuestionManager;
+import VIEW.QuizView;
+import VIEW.MainMenu;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PlayMenuModel extends JFrame {
+    private Statistics statistics;
 
-    public PlayMenuModel() {
+    public PlayMenuModel(Statistics statistics) {
+        this.statistics = statistics;
+
         setTitle("Play Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -27,10 +28,12 @@ public class PlayMenuModel extends JFrame {
         Button buttonFactory = new Button();
         JButton hangmanButton = buttonFactory.createButton("Hangman");
         JButton quizButton = buttonFactory.createButton("Quiz");
+        JButton backButton = buttonFactory.createButton("Zurück"); // Neuer Zurück-Button
 
         // Buttons hinzufügen
         backgroundPanel.add(hangmanButton);
         backgroundPanel.add(quizButton);
+        backgroundPanel.add(backButton); // Zurück-Button hinzufügen
 
         // Button-Positionierung
         int windowWidth = getWidth();
@@ -38,40 +41,32 @@ public class PlayMenuModel extends JFrame {
         int buttonWidth = 300;
         int buttonHeight = 40;
 
-        hangmanButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 60, buttonWidth, buttonHeight);
-        quizButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
+        hangmanButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
+        quizButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
+        backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight); // "Zurück" unter den anderen
 
         // ActionListener für Hangman-Button
-        hangmanButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Schließt das aktuelle Fenster
-                SwingUtilities.invokeLater(() -> {
-                    HangmanModel model = new HangmanModel();
-                    HangmanView view = new HangmanView(model);
-                    view.setVisible(true);
-                });
-            }
+        hangmanButton.addActionListener(e -> {
+            dispose();
+            SwingUtilities.invokeLater(() -> {
+                HangmanModel model = new HangmanModel();
+                HangmanView view = new HangmanView(model, statistics);
+                view.setVisible(true);
+            });
         });
 
         // ActionListener für Quiz-Button
-        quizButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                QuestionManager questionManager = new QuestionManager();
-                questionManager.loadQuestions(); // Lädt Fragen
-                Question question = questionManager.getQuestion(0); // Erste Frage abrufen
+        quizButton.addActionListener(e -> {
+            dispose();
+            new QuizView(statistics);
+        });
 
-                if (question != null) {
-                    JOptionPane.showMessageDialog(null, "Frage: " + question.getQuestionText());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Keine Fragen verfügbar!");
-                }
-            }
+        // ActionListener für Zurück-Button (führt zum MainMenu zurück)
+        backButton.addActionListener(e -> {
+            dispose();
+            new MainMenu(statistics);
         });
 
         setVisible(true);
     }
-
-
 }

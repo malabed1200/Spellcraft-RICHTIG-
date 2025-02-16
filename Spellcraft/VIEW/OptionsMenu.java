@@ -1,61 +1,54 @@
 package VIEW;
 
-import VIEW.MORE.*;
+import VIEW.MORE.BackgroundPanel;
+import VIEW.MORE.Button;
+import MODEL.Statistics;
 
 import javax.swing.*;
 
 public class OptionsMenu extends JFrame {
+    private Statistics statistics;
 
-    public OptionsMenu() {
-        // Erstelle das Hauptfenster
+    public OptionsMenu(Statistics statistics) {
+        this.statistics = statistics;
+
         setTitle("Minecraft Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(null);
 
-        // Hintergrundpanel hinzufügen
-        //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
+        // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
-        backgroundPanel.setLayout(null); // Absolute Positionierung
+        backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
-        // Buttons hinzufügen
+        // Button Factory nutzen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("Add Question");
-        JButton button2 = buttonFactory.createButton("Remove Question");
-        JButton button3 = buttonFactory.createButton("Back");
+        JButton addQuestionButton = buttonFactory.createButton("Add Question");
+        JButton removeQuestionButton = buttonFactory.createButton("Remove Question");
+        JButton backButton = buttonFactory.createButton("Zurück"); // Umbenannter Button
 
-        // Buttons zum Hintergrund hinzufügen
-        backgroundPanel.add(button1);
-        backgroundPanel.add(button2);
-        backgroundPanel.add(button3);
+        // Buttons hinzufügen
+        backgroundPanel.add(addQuestionButton);
+        backgroundPanel.add(removeQuestionButton);
+        backgroundPanel.add(backButton);
 
-        // Zentrierung der Buttons sicherstellen
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                int windowWidth = getWidth();
-                int windowHeight = getHeight();
+        // Button-Positionierung
+        int windowWidth = getWidth();
+        int windowHeight = getHeight();
+        int buttonWidth = 300;
+        int buttonHeight = 40;
 
-                int buttonWidth = 300;
-                int buttonHeight = 40;
+        addQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
+        removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
+        backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
-                // Buttons dynamisch zentrieren
-                button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 60, buttonWidth, buttonHeight);
-                button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-                button3.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 +60, buttonWidth, buttonHeight);
-            }
+        // ActionListener für "Zurück"-Button → Zurück zum MainMenu mit Statistik
+        backButton.addActionListener(e -> {
+            dispose();
+            new MainMenu(statistics);
         });
 
-        // Frame anzeigen
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new OptionsMenu();
-    }
 }
-
-// Benutzerdefiniertes JPanel für den flexiblen Hintergrund
-
-
