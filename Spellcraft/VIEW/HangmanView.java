@@ -92,7 +92,7 @@ public class HangmanView extends JFrame {
 
     private void goToMainMenu() {
         this.dispose();
-        new MainMenu(); // Hauptmenü öffnen
+        new MainMenu(model.getStatistics()); // Statistik übergeben
     }
 
     public void updateView() {

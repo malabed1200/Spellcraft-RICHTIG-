@@ -3,12 +3,16 @@ package VIEW;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import MODEL.PlayMenuModel;
+import MODEL.Statistics;
 
 import javax.swing.*;
 
 public class MainMenu extends JFrame {
+    private Statistics statistics; // Statistik-Objekt speichern
 
-    public MainMenu() {
+    public MainMenu(Statistics statistics) {
+        this.statistics = statistics; // Speichern der Statistik
+
         // Hauptfenster
         setTitle("SPELLCRAFT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,7 +52,10 @@ public class MainMenu extends JFrame {
         });
 
         // ActionListener für Stats
-        statsButton.addActionListener(e -> showStats());
+        statsButton.addActionListener(e -> {
+            dispose();
+            new StatisticsView(statistics); // Statistik an StatisticsView übergeben
+        });
 
         // ActionListener für Options
         optionsButton.addActionListener(e -> {
@@ -58,10 +65,4 @@ public class MainMenu extends JFrame {
 
         setVisible(true);
     }
-
-    private void showStats() {
-        JOptionPane.showMessageDialog(this, "Statistiken werden hier später angezeigt!");
-    }
-
-
 }

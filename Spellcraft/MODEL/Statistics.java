@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Klasse zur Speicherung von Statistik-Daten
-class Statistics {
+public class Statistics {
     private int correctAnswers;
     private int incorrectAnswers;
 
