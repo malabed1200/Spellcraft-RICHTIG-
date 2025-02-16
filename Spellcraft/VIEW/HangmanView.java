@@ -1,20 +1,17 @@
 package VIEW;
 
 import MODEL.HangmanModel;
+import VIEW.MORE.BackgroundPanel;
+import VIEW.MORE.Button;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
 
-// View: Stellt die GUI dar
 public class HangmanView extends JFrame {
     private JLabel wordLabel, categoryLabel;
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
-    private ImageIcon background;
-    private JButton menuButton;
+    private JButton backButton;
     private HangmanModel model;
 
     public HangmanView(HangmanModel model) {
@@ -25,36 +22,48 @@ public class HangmanView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        background = new ImageIcon("/mnt/data/image.png");
+        // Hintergrund als Fullscreen setzen
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Hangman_Hintergrund.jpg");
+        backgroundPanel.setLayout(new BorderLayout());
+        setContentPane(backgroundPanel);
 
+        // Obere Leiste mit Kategorie
         JPanel topPanel = new JPanel(new BorderLayout());
-        categoryLabel = new JLabel("Category: " + model.getCategory(), SwingConstants.CENTER);
+        categoryLabel = new JLabel("ANIMALS", SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setBackground(Color.ORANGE);
         categoryLabel.setForeground(Color.WHITE);
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(categoryLabel, BorderLayout.CENTER);
 
-        menuButton = new JButton("Menu");
-        menuButton.setFont(new Font("Arial", Font.BOLD, 14));
-        menuButton.addActionListener(e -> openMenu());
-        topPanel.add(menuButton, BorderLayout.EAST);
+        // "Zurück"-Button oben rechts
+        Button buttonFactory = new Button();
+        backButton = buttonFactory.createButton("Zurück");
+        backButton.setPreferredSize(new Dimension(80, 30));
+        backButton.addActionListener(e -> goToMainMenu());
+        topPanel.add(backButton, BorderLayout.EAST);
 
-        add(topPanel, BorderLayout.NORTH);
+        backgroundPanel.add(topPanel, BorderLayout.NORTH);
 
+        // Wort-Anzeige direkt unter Kategorie
         wordLabel = new JLabel(model.getMaskedWord(), SwingConstants.CENTER);
         wordLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        add(wordLabel, BorderLayout.NORTH);
+        backgroundPanel.add(wordLabel, BorderLayout.CENTER);
 
+        // Hangman-Zeichnung (fullscreen angepasst)
         hangmanPanel = new HangmanPanel(model);
-        add(hangmanPanel, BorderLayout.CENTER);
+        backgroundPanel.add(hangmanPanel, BorderLayout.CENTER);
 
-        keyboardPanel = new JPanel(new GridLayout(4, 7));
+        // Tastatur füllt gesamten unteren Bereich
+        keyboardPanel = new JPanel(new GridLayout(4, 7, 5, 5)); // Abstände entfernt
+        backgroundPanel.add(keyboardPanel, BorderLayout.SOUTH);
         addKeyboard();
-        add(keyboardPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
     }
 
     private void addKeyboard() {
+        keyboardPanel.removeAll();
         for (char c = 'A'; c <= 'Z'; c++) {
             JButton button = new JButton(String.valueOf(c));
             button.setFont(new Font("Arial", Font.BOLD, 18));
@@ -62,6 +71,8 @@ public class HangmanView extends JFrame {
             button.addActionListener(e -> processGuess(finalC, button));
             keyboardPanel.add(button);
         }
+        keyboardPanel.revalidate();
+        keyboardPanel.repaint();
     }
 
     private void processGuess(char letter, JButton button) {
@@ -85,27 +96,12 @@ public class HangmanView extends JFrame {
     private void resetGame() {
         model.resetGame();
         updateView();
-        resetKeyboard();
-    }
-
-    private void resetKeyboard() {
-        keyboardPanel.removeAll();
         addKeyboard();
-        keyboardPanel.revalidate();
-        keyboardPanel.repaint();
     }
 
-    private void openMenu() {
-        JDialog menuDialog = new JDialog(this, "Menu", true);
-        menuDialog.setSize(200, 150);
-        menuDialog.setLayout(new FlowLayout());
-
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> menuDialog.dispose());
-        menuDialog.add(backButton);
-
-        menuDialog.setLocationRelativeTo(this);
-        menuDialog.setVisible(true);
+    private void goToMainMenu() {
+        this.dispose();
+        new MainMenu();
     }
 
     public void updateView() {

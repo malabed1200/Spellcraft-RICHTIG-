@@ -1,14 +1,12 @@
 package MODEL;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
+import VIEW.MORE.Button;
 
 // Model: Enthält die Spiellogik
 public class HangmanModel {
