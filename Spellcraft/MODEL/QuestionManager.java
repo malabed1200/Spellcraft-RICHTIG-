@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Klasse zur Verwaltung der Fragenliste
-class QuestionManager {
+public class QuestionManager {
     private List<Question> questions;
 
     public QuestionManager() {

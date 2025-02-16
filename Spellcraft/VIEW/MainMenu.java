@@ -2,56 +2,66 @@ package VIEW;
 
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import MODEL.PlayMenuModel;
 
 import javax.swing.*;
 
 public class MainMenu extends JFrame {
 
     public MainMenu() {
-        // Erstelle das Hauptfenster
-        setTitle("SPELLCRAFT");//wassolldas
+        // Hauptfenster
+        setTitle("SPELLCRAFT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(null);
 
-        // Hintergrundpanel hinzufügen
-        //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
+        // Hintergrund
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Main_Menu.png");
-        backgroundPanel.setLayout(null); // Absolute Positionierung
+        backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
-        // Buttons hinzufügen
+        // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("Play");
-        JButton button2 = buttonFactory.createButton("Stats");
-        JButton button3 = buttonFactory.createButton("Options");
+        JButton playButton = buttonFactory.createButton("Play");
+        JButton statsButton = buttonFactory.createButton("Stats");
+        JButton optionsButton = buttonFactory.createButton("Options");
 
-        // Buttons zum Hintergrund hinzufügen
-        backgroundPanel.add(button1);
-        backgroundPanel.add(button2);
-        backgroundPanel.add(button3);
+        // Buttons hinzufügen
+        backgroundPanel.add(playButton);
+        backgroundPanel.add(statsButton);
+        backgroundPanel.add(optionsButton);
 
+        // Button-Größe & Position
         int windowWidth = getWidth();
         int windowHeight = getHeight();
-
         int buttonWidth = 300;
         int buttonHeight = 40;
 
-        // Buttons dynamisch zentrieren
-        button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 60, buttonWidth, buttonHeight);
-        button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-        button3.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
+        playButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 60, buttonWidth, buttonHeight);
+        statsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
+        optionsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
 
-        // Frame anzeigen
+        // ActionListener für Play
+        playButton.addActionListener(e -> {
+            dispose();
+            new PlayMenuModel();
+        });
+
+        // ActionListener für Stats
+        statsButton.addActionListener(e -> showStats());
+
+        // ActionListener für Options
+        optionsButton.addActionListener(e -> {
+            dispose();
+            new OptionsMenu();
+        });
+
         setVisible(true);
     }
 
-
-    //TEST methode
-    public static void main(String[] args) {
-        new MainMenu();
+    private void showStats() {
+        JOptionPane.showMessageDialog(this, "Statistiken werden hier später angezeigt!");
     }
+
+
 }
-
-// Benutzerdefiniertes JPanel für den flexiblen Hintergrund
-
