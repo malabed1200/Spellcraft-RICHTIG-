@@ -1,19 +1,16 @@
 package MODEL;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-import VIEW.MORE.Button;
 
-// Model: Enthält die Spiellogik
 public class HangmanModel {
     private final String word = "PANDA";
     private final String category = "ANIMALS";
     private final Set<Character> guessedLetters = new HashSet<>();
     private int wrongGuesses = 0;
+
+    // Statistik-Objekt erstellen
+    private Statistics statistics = new Statistics();
 
     public String getMaskedWord() {
         StringBuilder maskedWord = new StringBuilder();
@@ -30,9 +27,11 @@ public class HangmanModel {
     public boolean guessLetter(char letter) {
         if (word.contains(String.valueOf(letter))) {
             guessedLetters.add(letter);
+            statistics.incrementCorrect(); // Richtig geraten -> Statistik updaten
             return true;
         } else {
             wrongGuesses++;
+            statistics.incrementIncorrect(); // Falsch geraten -> Statistik updaten
             return false;
         }
     }
@@ -60,5 +59,9 @@ public class HangmanModel {
 
     public String getCategory() {
         return category;
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
     }
 }

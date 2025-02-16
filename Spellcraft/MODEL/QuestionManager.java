@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Klasse zur Verwaltung der Fragenliste
-class QuestionManager {
+public class QuestionManager {
     private List<Question> questions;
     private SaveLoad sl = new SaveLoad();
     private String regex = "%([?]{3})(?<Frage>[\\w ßüäö]*)\\1([!]{3})(?<Antwort>[\\w ßüäö]*)\\3%";

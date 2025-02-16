@@ -1,6 +1,7 @@
 package VIEW;
 
 import MODEL.HangmanModel;
+import MODEL.Statistics;
 import VIEW.MORE.Button;
 
 import javax.swing.*;
@@ -11,10 +12,12 @@ public class HangmanView extends JFrame {
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
     private HangmanModel model;
+    private Statistics statistics;
     private JButton backButton;
 
-    public HangmanView(HangmanModel model) {
+    public HangmanView(HangmanModel model, Statistics statistics) {
         this.model = model;
+        this.statistics = statistics;
 
         setTitle("Hangman Game");
         setSize(800, 700);
@@ -33,9 +36,9 @@ public class HangmanView extends JFrame {
         // Zurück-Button oben links
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("Zurück");
-        backButton.setPreferredSize(new Dimension(100, 30)); // Kleinere Größe
+        backButton.setPreferredSize(new Dimension(100, 30));
         backButton.addActionListener(e -> goToMainMenu());
-        topPanel.add(backButton, BorderLayout.WEST); // Links positionieren
+        topPanel.add(backButton, BorderLayout.WEST);
 
         add(topPanel, BorderLayout.NORTH);
 
@@ -70,9 +73,11 @@ public class HangmanView extends JFrame {
     private void checkGameStatus() {
         if (model.isWin()) {
             JOptionPane.showMessageDialog(this, "Glückwunsch! Du hast gewonnen!");
+            statistics.incrementCorrect(); // Richtige Antwort speichern
             resetGame();
         } else if (model.isGameOver()) {
             JOptionPane.showMessageDialog(this, "Game Over! Das Wort war: " + model.getWord());
+            statistics.incrementIncorrect(); // Falsche Antwort speichern
             resetGame();
         }
     }
@@ -92,7 +97,7 @@ public class HangmanView extends JFrame {
 
     private void goToMainMenu() {
         this.dispose();
-        new MainMenu(); // Hauptmenü öffnen
+        new MainMenu(statistics); // Zurück zum Hauptmenü mit gespeicherten Statistiken
     }
 
     public void updateView() {
