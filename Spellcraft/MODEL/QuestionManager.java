@@ -10,7 +10,7 @@ public class QuestionManager extends Manager{
     private boolean difference = false;
 
     public QuestionManager() {
-        super("%([?]{3})(?<Frage>[\\w ßüäö]*)\\1([!]{3})(?<Antwort>[\\w ßüäö]*)\\3%");
+        super("&([?]{3})(?<Frage>[\\w ßüäö]*)\\1([!]{3})(?<Antwort>[\\w ßüäö]*)\\3&");
         this.questions = new ArrayList<>();
         loadQuestions();
     }
@@ -45,7 +45,7 @@ public class QuestionManager extends Manager{
     }
 
     public String addQuestion(String question, String answer) {
-        String ruckGabe="";//hgalo
+        String ruckGabe="";
 
         if(question.equals("") && answer.equals("")){
             ruckGabe="Bitte Frage und Antwort eingeben";

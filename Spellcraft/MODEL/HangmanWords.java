@@ -9,7 +9,7 @@ public class HangmanWords extends Manager{
     private List<String> words;
 
     public HangmanWords(){
-        super("%([!]{3})(?<Antwort>[\\w ßüäö]*)\\1%");
+        super("&([!]{3})(?<Antwort>[\\w ßüäö]*)\\1&");
         words = new ArrayList<String>();
         loadQuestions();
     }
