@@ -3,12 +3,17 @@ package CONTROLLER;
 import MODEL.Statistics;
 import VIEW.MainMenu;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Controller {
     public static void main(String[] args) {
-        // Erstelle die Statistik-Instanz
-        Statistics statistics = new Statistics();
-
-        // Starte das Hauptmenü mit Statistik-Daten
-        //new MainMenu(statistics);
+        String dateiName = "Spellcraft/Speicher/woerter.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(dateiName))){
+            writer.write("");
+        }catch(IOException e){
+            System.out.println("Fehler beim speichern");
+        }
     }
 }

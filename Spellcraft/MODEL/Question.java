@@ -13,6 +13,10 @@ public class Question{
         this.answer = answer;
     }
 
+    public String getQuestion() {
+        return "Q: "+questionText+"\nA: "+answer;
+    }
+
     public String getQuestionText() {
         return questionText;
     }

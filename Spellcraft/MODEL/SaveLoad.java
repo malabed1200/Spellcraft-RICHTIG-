@@ -16,7 +16,7 @@ public class SaveLoad {
 
     public String load(String name){
         File file = new File(pfad+name+".txt");
-        try (BufferedReader reader = new BufferedReader(new FileReader(pfad + File.separator + name))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(pfad+name+".txt"))) {
             String line;
             String ergebnis = "";
             while ((line = reader.readLine()) != null) {

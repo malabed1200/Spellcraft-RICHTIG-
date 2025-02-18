@@ -1,5 +1,6 @@
 package CONTROLLER;
 
+import MODEL.QuestionManager;
 import VIEW.*;
 
 import javax.swing.*;
@@ -10,9 +11,12 @@ import java.awt.event.ActionListener;
 
 public class HauptController implements ActionListener {
     private JFrameE currentFrame;
-    private String addQu;
-    private String addAns;
-    private String index;
+    private String addQu="";
+    private String addAns="";
+    private String index="-1";
+
+    private QuestionManager questionManager=new QuestionManager();
+
 
     public HauptController() {
         currentFrame = new MainMenu(this);
@@ -47,6 +51,16 @@ public class HauptController implements ActionListener {
                 currentFrame=new QuestionRemoveMenu(this);
                 addDocumentListenerQuRemove();
                 break;
+            case "Add":
+                String antwort=questionManager.addQuestion(addQu, addAns);
+                JOptionPane.showMessageDialog(currentFrame,antwort);
+                currentFrame.updateTextAnswer();
+                break;
+            case "Remove":
+                String antwort1=questionManager.removeQuestion(index);
+                JOptionPane.showMessageDialog(currentFrame,antwort1);
+                currentFrame.updateTextAnswer();
+                break;
         }
     }
 
@@ -54,17 +68,17 @@ public class HauptController implements ActionListener {
         currentFrame.getTextfield()[0].getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateIndex(currentFrame.getTextfield()[0]);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateIndex(currentFrame.getTextfield()[0]);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateIndex(currentFrame.getTextfield()[0]);
             }
         });
     }
@@ -73,35 +87,47 @@ public class HauptController implements ActionListener {
         currentFrame.getTextfield()[0].getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddQu(currentFrame.getTextfield()[0]);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddQu(currentFrame.getTextfield()[0]);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddQu(currentFrame.getTextfield()[0]);
             }
         });
 
         currentFrame.getTextfield()[1].getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddAns(currentFrame.getTextfield()[1]);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddAns(currentFrame.getTextfield()[1]);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                currentFrame.updateText();
+                updateAddAns(currentFrame.getTextfield()[1]);
             }
         });
+    }
+
+    public void updateAddQu(JTextField textArea) {
+        addQu = textArea.getText();
+    }
+
+    public void updateAddAns(JTextField textArea) {
+        addAns = textArea.getText();
+    }
+
+    public void updateIndex(JTextField textArea) {
+        index = textArea.getText();
     }
 }

@@ -65,12 +65,9 @@ public class QuestionAddMenu extends JFrameE {
         setVisible(true);
     }
 
-    public void updateText(){
-
-    }
-
     public void updateTextAnswer(){
-
+        textField.setText("");
+        textField1.setText("");
     }
 
     public JTextField[] getTextfield(){

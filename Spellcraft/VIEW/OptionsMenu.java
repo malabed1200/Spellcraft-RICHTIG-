@@ -52,8 +52,6 @@ public class OptionsMenu extends JFrameE {
         setVisible(true);
     }
 
-    public void updateText(){}
-
     public void updateTextAnswer(){}
 
     public JTextField[] getTextfield(){return null;}

@@ -29,8 +29,6 @@ public class QuestionManager extends Manager{
             String c2 = matcher.group("Antwort");
 
             questions.add(new Question(c1, c2));
-
-            //System.out.println("\nFrage: " + c1 + "?, Antwort:" + c2);
         }
     }
 
@@ -46,18 +44,42 @@ public class QuestionManager extends Manager{
         }
     }
 
-    public void addQuestion(String question, String answer) {
-        questions.add(new Question(question, answer));
-        difference = true;
+    public String addQuestion(String question, String answer) {
+        String ruckGabe="";
+
+        if(question.equals("") && answer.equals("")){
+            ruckGabe="Bitte Frage und Antwort eingeben";
+        }
+        else if(question.equals("")){
+            ruckGabe="Bitte Frage eingeben";
+        }
+        else if(answer.equals("")){
+            ruckGabe="Bitte Antwort eingeben";
+        }
+        else{
+            questions.add(new Question(question, answer));
+            difference = true;
+            ruckGabe="Frage wurde hinzugefügt:\n"+ruckGabe;
+        }
+        return ruckGabe;
     }
 
-    public boolean removeQuestion(int index) {
+    public String removeQuestion(String indexF) {
+        int index=-1;
+
+        try{
+            indexF=indexF.trim();
+            index=Integer.parseInt(indexF);
+        }catch(NumberFormatException e){
+            return "Bitte eine gültige Zahl eingeben";
+        }
+
         if (index >= 0 && index < questions.size()) {
             questions.remove(index);
             difference = true;
-            return true;
+            return "Frage "+index+" wurde entfernt";
         }
-        return false;
+        return "Bitte eine Zahl von "+1+" bis "+questions.size()+" eingeben";
     }
 
     public Question getQuestion(int index) {

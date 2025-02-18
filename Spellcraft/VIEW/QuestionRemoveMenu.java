@@ -38,7 +38,7 @@ public class QuestionRemoveMenu extends JFrameE {
         // Erstellen des Textfeldes & JLabels
         textField = new CustomTextField("Question Number");
         backgroundPanel.add(textField);
-        textField.setEditable(false);
+        textField.setEditable(true);
 
         int windowWidth = getWidth();
         int windowHeight = getHeight();
@@ -59,11 +59,9 @@ public class QuestionRemoveMenu extends JFrameE {
         setVisible(true);
     }
 
-    public void updateText(){
-
+    public void updateTextAnswer(){
+        textField.setText("");
     }
-
-    public void updateTextAnswer(){}
 
     public JTextField[] getTextfield(){
         return new JTextField []{textField};
