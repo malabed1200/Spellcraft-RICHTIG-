@@ -60,7 +60,7 @@ public class QuizView extends JFrame {
         backButton.setBounds(50, 500, 120, 40);
         backButton.addActionListener(e -> {
             dispose();
-            new PlayMenuModel(statistics);
+            //new PlayMenuModel(statistics);
         });
         backgroundPanel.add(backButton);
 
@@ -90,7 +90,7 @@ public class QuizView extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Quiz beendet!");
             dispose();
-            new PlayMenuModel(statistics);
+            //new PlayMenuModel(statistics);
         }
     }
 }

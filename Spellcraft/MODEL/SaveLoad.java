@@ -20,9 +20,11 @@ public class SaveLoad {
             String line;
             String ergebnis = "";
             while ((line = reader.readLine()) != null) {
-                ergebnis += line;
+                ergebnis += line+"\n";
             }
-            file.delete();
+            if(name.equals("fragenUantworten")) {
+                file.delete();
+            }
             return ergebnis;
         }catch (IOException e) {
             e.printStackTrace();

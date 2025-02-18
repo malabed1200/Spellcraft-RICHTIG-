@@ -48,7 +48,7 @@ public class StatisticsView extends JFrame {
         backButton.setBounds(50, 500, 120, 40);
         backButton.addActionListener(e -> {
             dispose();
-            new MainMenu(statistics); // Korrigierter Aufruf mit statistics-Parameter
+            //new MainMenu(statistics); // Korrigierter Aufruf mit statistics-Parameter
         });
 
         backgroundPanel.add(backButton);

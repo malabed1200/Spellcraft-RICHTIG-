@@ -9,6 +9,6 @@ public class Controller {
         Statistics statistics = new Statistics();
 
         // Starte das Hauptmenü mit Statistik-Daten
-        new MainMenu(statistics);
+        //new MainMenu(statistics);
     }
 }

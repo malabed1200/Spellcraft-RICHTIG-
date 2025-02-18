@@ -1,5 +1,6 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import MODEL.PlayMenuModel;
@@ -7,12 +8,9 @@ import MODEL.Statistics;
 
 import javax.swing.*;
 
-public class MainMenu extends JFrame {
-    private Statistics statistics;
+public class MainMenu extends JFrameE {
 
-    public MainMenu(Statistics statistics) {
-        this.statistics = statistics;
-
+    public MainMenu(HauptController controller) {
         // Hauptfenster
         setTitle("SPELLCRAFT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,8 +25,16 @@ public class MainMenu extends JFrame {
         // Buttons erstellen
         Button buttonFactory = new Button();
         JButton playButton = buttonFactory.createButton("Play");
+        playButton.setActionCommand("Play");
+        playButton.addActionListener(controller);
+
         JButton statsButton = buttonFactory.createButton("Stats");
+        statsButton.setActionCommand("Stats");
+        statsButton.addActionListener(controller);
+
         JButton optionsButton = buttonFactory.createButton("Options");
+        optionsButton.setActionCommand("Options");
+        optionsButton.addActionListener(controller);
 
         // Buttons hinzufügen
         backgroundPanel.add(playButton);
@@ -45,24 +51,13 @@ public class MainMenu extends JFrame {
         statsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
         optionsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
 
-        // ActionListener für Play
-        playButton.addActionListener(e -> {
-            dispose();
-            new PlayMenuModel(statistics);
-        });
-
-        // ActionListener für Stats → Statistik-Fenster öffnen
-        statsButton.addActionListener(e -> {
-            dispose();
-            new StatisticsView(statistics);
-        });
-
-        // ActionListener für Options → Options-Menü öffnen
-        optionsButton.addActionListener(e -> {
-            dispose();
-            new OptionsMenu(statistics);
-        });
-
         setVisible(true);
     }
+
+    public void updateText(){}
+
+    public void updateTextAnswer(){}
+
+
+    public JTextField[] getTextfield(){return null;}
 }

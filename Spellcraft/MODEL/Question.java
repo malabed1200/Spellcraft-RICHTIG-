@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Klasse zur Verwaltung einzelner Fragen
-public class Question {
+public class Question{
 
     private String questionText;
     private String answer;

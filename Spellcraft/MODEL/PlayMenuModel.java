@@ -9,11 +9,8 @@ import VIEW.MainMenu;
 import javax.swing.*;
 
 public class PlayMenuModel extends JFrame {
-    private Statistics statistics;
 
-    public PlayMenuModel(Statistics statistics) {
-        this.statistics = statistics;
-
+    public PlayMenuModel() {
         setTitle("Play Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -45,27 +42,27 @@ public class PlayMenuModel extends JFrame {
         quizButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
         backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight); // "Zurück" unter den anderen
 
-        // ActionListener für Hangman-Button
-        hangmanButton.addActionListener(e -> {
-            dispose();
-            SwingUtilities.invokeLater(() -> {
-                HangmanModel model = new HangmanModel();
-                HangmanView view = new HangmanView(model, statistics);
-                view.setVisible(true);
-            });
-        });
-
-        // ActionListener für Quiz-Button
-        quizButton.addActionListener(e -> {
-            dispose();
-            new QuizView(statistics);
-        });
-
-        // ActionListener für Zurück-Button (führt zum MainMenu zurück)
-        backButton.addActionListener(e -> {
-            dispose();
-            new MainMenu(statistics);
-        });
+//        // ActionListener für Hangman-Button
+//        hangmanButton.addActionListener(e -> {
+//            dispose();
+//            SwingUtilities.invokeLater(() -> {
+//                HangmanModel model = new HangmanModel();
+//                HangmanView view = new HangmanView(model, statistics);
+//                view.setVisible(true);
+//            });
+//        });
+//
+//        // ActionListener für Quiz-Button
+//        quizButton.addActionListener(e -> {
+//            dispose();
+//            new QuizView(statistics);
+//        });
+//
+//        // ActionListener für Zurück-Button (führt zum MainMenu zurück)
+//        backButton.addActionListener(e -> {
+//            dispose();
+//            new MainMenu(statistics);
+//        });
 
         setVisible(true);
     }

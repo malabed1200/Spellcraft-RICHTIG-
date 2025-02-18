@@ -97,7 +97,7 @@ public class HangmanView extends JFrame {
 
     private void goToMainMenu() {
         this.dispose();
-        new MainMenu(statistics); // Zurück zum Hauptmenü mit gespeicherten Statistiken
+        //new MainMenu(statistics); // Zurück zum Hauptmenü mit gespeicherten Statistiken
     }
 
     public void updateView() {

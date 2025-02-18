@@ -5,22 +5,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Klasse zur Verwaltung der Fragenliste
-public class QuestionManager {
+public class QuestionManager extends Manager{
     private List<Question> questions;
-    private SaveLoad sl = new SaveLoad();
-    private String regex = "%([?]{3})(?<Frage>[\\w ßüäö]*)\\1([!]{3})(?<Antwort>[\\w ßüäö]*)\\3%";
     private boolean difference = false;
 
     public QuestionManager() {
+        super("%([?]{3})(?<Frage>[\\w ßüäö]*)\\1([!]{3})(?<Antwort>[\\w ßüäö]*)\\3%");
         this.questions = new ArrayList<>();
         loadQuestions();
     }
 
     //Fragen von einem großen String mit regex in einer Liste speichern
+    @Override
     public void loadQuestions() {
-        String data=sl.load("fragenUantworten");
+        String data=getSaveLoad().load("fragenUantworten");
 
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(getRegex());
 
         Matcher matcher = pattern.matcher(data);
 
@@ -32,17 +32,17 @@ public class QuestionManager {
 
             //System.out.println("\nFrage: " + c1 + "?, Antwort:" + c2);
         }
-
     }
 
     //Fragen von einer Liste in einem großen String geben und an SaveLoad übergeben
+    @Override
     public void saveQuestions() {
         if(difference){
             String data="";
             for (Question q : questions) {
                 data+=q.getData();
             }
-            sl.save(data,"fragenUantworten");
+            getSaveLoad().save(data,"fragenUantworten");
         }
     }
 
@@ -65,5 +65,10 @@ public class QuestionManager {
             return questions.get(index);
         }
         return null;
+    }
+
+    public void statistikErneuern() {
+        Statistics objekt=new Statistics();
+        objekt.reloadCount(questions.size());
     }
 }

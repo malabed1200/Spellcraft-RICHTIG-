@@ -1,18 +1,16 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import MODEL.Statistics;
 
 import javax.swing.*;
 
-public class OptionsMenu extends JFrame {
-    private Statistics statistics;
+public class OptionsMenu extends JFrameE {
 
-    public OptionsMenu(Statistics statistics) {
-        this.statistics = statistics;
-
-        setTitle("Minecraft Main Menu");
+    public OptionsMenu(HauptController controller) {
+        setTitle("Options Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(null);
@@ -25,8 +23,16 @@ public class OptionsMenu extends JFrame {
         // Button Factory nutzen
         Button buttonFactory = new Button();
         JButton addQuestionButton = buttonFactory.createButton("Add Question");
+        addQuestionButton.setActionCommand("Add Question");
+        addQuestionButton.addActionListener(controller);
+
         JButton removeQuestionButton = buttonFactory.createButton("Remove Question");
-        JButton backButton = buttonFactory.createButton("Zurück"); // Umbenannter Button
+        removeQuestionButton.setActionCommand("Remove Question");
+        removeQuestionButton.addActionListener(controller);
+
+        JButton backButton = buttonFactory.createButton("Back"); // Umbenannter Button
+        backButton.setActionCommand("BackH");
+        backButton.addActionListener(controller);
 
         // Buttons hinzufügen
         backgroundPanel.add(addQuestionButton);
@@ -43,12 +49,12 @@ public class OptionsMenu extends JFrame {
         removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
         backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
-        // ActionListener für "Zurück"-Button → Zurück zum MainMenu mit Statistik
-        backButton.addActionListener(e -> {
-            dispose();
-            new MainMenu(statistics);
-        });
-
         setVisible(true);
     }
+
+    public void updateText(){}
+
+    public void updateTextAnswer(){}
+
+    public JTextField[] getTextfield(){return null;}
 }

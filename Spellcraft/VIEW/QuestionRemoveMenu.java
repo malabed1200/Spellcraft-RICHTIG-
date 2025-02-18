@@ -1,12 +1,14 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import VIEW.MORE.*;
 
 import javax.swing.*;
 
-public class QuestionRemoveMenu extends JFrame {
+public class QuestionRemoveMenu extends JFrameE {
+    private JTextField textField;
 
-    public QuestionRemoveMenu() {
+    public QuestionRemoveMenu(HauptController controller) {
         // Erstelle das Hauptfenster
         setTitle("Remove Question");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,15 +24,21 @@ public class QuestionRemoveMenu extends JFrame {
         // Buttons hinzufügen
         Button buttonFactory = new Button();
         JButton button1 = buttonFactory.createButton("Remove");
+        button1.setActionCommand("Remove");
+        button1.addActionListener(controller);
+
         JButton button2 = buttonFactory.createButton("Back");
+        button2.setActionCommand("Options");
+        button2.addActionListener(controller);
 
         // Buttons zum Hintergrund hinzufügen
         backgroundPanel.add(button1);
         backgroundPanel.add(button2);
 
         // Erstellen des Textfeldes & JLabels
-        CustomTextField textFieldQ = new CustomTextField("Question Number");
-        backgroundPanel.add(textFieldQ);
+        textField = new CustomTextField("Question Number");
+        backgroundPanel.add(textField);
+        textField.setEditable(false);
 
         int windowWidth = getWidth();
         int windowHeight = getHeight();
@@ -41,7 +49,7 @@ public class QuestionRemoveMenu extends JFrame {
         int textFieldHeight = 30;
 
         // Textfeld unter den Buttons platzieren
-        textFieldQ.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 60, textFieldWidth, textFieldHeight);
+        textField.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 60, textFieldWidth, textFieldHeight);
 
         // Buttons dynamisch zentrieren
         button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
@@ -51,10 +59,14 @@ public class QuestionRemoveMenu extends JFrame {
         setVisible(true);
     }
 
+    public void updateText(){
 
-    //TEST methode
-    public static void main(String[] args) {
-        new QuestionRemoveMenu();
+    }
+
+    public void updateTextAnswer(){}
+
+    public JTextField[] getTextfield(){
+        return new JTextField []{textField};
     }
 }
 

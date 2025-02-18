@@ -1,12 +1,16 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import VIEW.MORE.*;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
-public class QuestionAddMenu extends JFrame {
+public class QuestionAddMenu extends JFrameE {
+    private JTextField textField;
+    private JTextField textField1;
 
-    public QuestionAddMenu() {
+    public QuestionAddMenu(HauptController controller) {
         // Erstelle das Hauptfenster
         setTitle("Add Question");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,20 +26,24 @@ public class QuestionAddMenu extends JFrame {
         // Buttons hinzufügen
         Button buttonFactory = new Button();
         JButton button1 = buttonFactory.createButton("Add");
+        button1.setActionCommand("Add");
+        button1.addActionListener(controller);
+
         JButton button2 = buttonFactory.createButton("Back");
+        button2.setActionCommand("Options");
+        button2.addActionListener(controller);
 
         // Buttons zum Hintergrund hinzufügen
         backgroundPanel.add(button1);
         backgroundPanel.add(button2);
 
         // Erstellen des Textfeldes & JLabels
-        CustomTextField textFieldQ = new CustomTextField("Question");
-        backgroundPanel.add(textFieldQ);
-        //JLabel Label= new CustomLabel("Hallo");
+        textField = new CustomTextField("Question");
+        backgroundPanel.add(textField);
 
         // Erstellen des Textfeldes & JLabels
-        CustomTextField textFieldA = new CustomTextField("Answer");
-        backgroundPanel.add(textFieldA);
+        textField1 = new CustomTextField("Answer");
+        backgroundPanel.add(textField1);
 
         int windowWidth = getWidth();
         int windowHeight = getHeight();
@@ -46,8 +54,8 @@ public class QuestionAddMenu extends JFrame {
         int textFieldHeight = 30;
 
         // Textfeld unter den Buttons platzieren
-        textFieldQ.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 90, textFieldWidth, textFieldHeight);
-        textFieldA.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 30, textFieldWidth, textFieldHeight);
+        textField.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 90, textFieldWidth, textFieldHeight);
+        textField1.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 30, textFieldWidth, textFieldHeight);
 
         // Buttons dynamisch zentrieren
         button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 30, buttonWidth, buttonHeight);
@@ -57,9 +65,15 @@ public class QuestionAddMenu extends JFrame {
         setVisible(true);
     }
 
+    public void updateText(){
 
-    //TEST methode
-    public static void main(String[] args) {
-        new QuestionAddMenu();
+    }
+
+    public void updateTextAnswer(){
+
+    }
+
+    public JTextField[] getTextfield(){
+        return new JTextField []{textField,textField1};
     }
 }
