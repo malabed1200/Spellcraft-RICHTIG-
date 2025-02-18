@@ -15,7 +15,7 @@ public class HauptController implements ActionListener {
     private String addAns="";
     private String index="-1";
 
-    private QuestionManager questionManager=new QuestionManager();
+    private QuestionManager questionManager;
 
 
     public HauptController() {
@@ -41,12 +41,19 @@ public class HauptController implements ActionListener {
                 currentFrame.dispose();
                 currentFrame=new MainMenu(this);
                 break;
+            case "Back":
+                currentFrame.dispose();
+                currentFrame=new OptionsMenu(this);
+                questionManager.saveQuestions();
+                break;
             case "Add Question":
+                questionManager=new QuestionManager();
                 currentFrame.dispose();
                 currentFrame=new QuestionAddMenu(this);
                 addDocumentListenerQuAdd();
                 break;
             case "Remove Question":
+                questionManager=new QuestionManager();
                 currentFrame.dispose();
                 currentFrame=new QuestionRemoveMenu(this);
                 addDocumentListenerQuRemove();
