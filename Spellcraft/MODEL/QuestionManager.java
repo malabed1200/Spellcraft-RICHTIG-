@@ -45,7 +45,7 @@ public class QuestionManager extends Manager{
     }
 
     public String addQuestion(String question, String answer) {
-        String ruckGabe="";
+        String ruckGabe="";//hgalo
 
         if(question.equals("") && answer.equals("")){
             ruckGabe="Bitte Frage und Antwort eingeben";
