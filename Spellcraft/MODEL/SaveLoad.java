@@ -5,12 +5,14 @@ import java.io.*;
 public class SaveLoad {
     private String pfad="Spellcraft/Speicher/";
 
-    public void save(String text, String name){
-        String dateiName = pfad+name+".txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(dateiName))){
-            writer.write(text);
-        }catch(IOException e){
-            System.out.println("Fehler beim speichern");
+    public void save(String text, String name) {
+        String dateiName = pfad + name + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(dateiName))) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(text);
+            writer.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println("Fehler beim Speichern");
         }
     }
 

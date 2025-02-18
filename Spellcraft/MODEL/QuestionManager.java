@@ -57,9 +57,10 @@ public class QuestionManager extends Manager{
             ruckGabe="Bitte Antwort eingeben";
         }
         else{
-            questions.add(new Question(question, answer));
+            Question qu=new Question(question, answer);
+            questions.add(qu);
             difference = true;
-            ruckGabe="Frage wurde hinzugefügt:\n"+ruckGabe;
+            ruckGabe="Frage wurde hinzugefügt:\n"+qu.getQuestion();
         }
         return ruckGabe;
     }
@@ -74,9 +75,12 @@ public class QuestionManager extends Manager{
             return "Bitte eine gültige Zahl eingeben";
         }
 
+        index--;
+
         if (index >= 0 && index < questions.size()) {
             questions.remove(index);
             difference = true;
+            index++;
             return "Frage "+index+" wurde entfernt";
         }
         return "Bitte eine Zahl von "+1+" bis "+questions.size()+" eingeben";
