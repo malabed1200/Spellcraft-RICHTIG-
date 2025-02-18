@@ -28,7 +28,7 @@ public class QuestionRemoveMenu extends JFrameE {
         button1.addActionListener(controller);
 
         JButton button2 = buttonFactory.createButton("Back");
-        button2.setActionCommand("Options");
+        button2.setActionCommand("Back");
         button2.addActionListener(controller);
 
         // Buttons zum Hintergrund hinzufügen
