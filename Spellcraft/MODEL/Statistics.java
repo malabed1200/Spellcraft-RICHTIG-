@@ -25,13 +25,28 @@ public class Statistics {
         saveLoad.save(data,name);
     }
 
-    public void load(){
-        String data=saveLoad.load(name);
+    public void load() {
+        String data = saveLoad.load(name);
+        if (data == null || data.trim().isEmpty()) {
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            count = 0;
+            return;  // Falls die Datei leer ist, setze Standardwerte
+        }
+
         String[] a = data.split("\n");
-        correctAnswers=Integer.parseInt(a[0]);
-        incorrectAnswers=Integer.parseInt(a[1]);
-        count=Integer.parseInt(a[2]);
+        try {
+            correctAnswers = Integer.parseInt(a[0]);
+            incorrectAnswers = Integer.parseInt(a[1]);
+            count = Integer.parseInt(a[2]);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            count = 0;
+            System.out.println("Fehler beim Laden der Statistik. Standardwerte werden gesetzt.");
+        }
     }
+
 
     public void incrementCorrect() {
         correctAnswers++;

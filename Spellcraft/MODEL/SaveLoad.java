@@ -17,20 +17,22 @@ public class SaveLoad {
     }
 
     public String load(String name){
-        File file = new File(pfad+name+".txt");
-        try (BufferedReader reader = new BufferedReader(new FileReader(pfad+name+".txt"))) {
+        File file = new File(pfad + name + ".txt");
+        if (!file.exists()) {
+            return "";  // Falls die Datei nicht existiert, leere Zeichenkette zurückgeben
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuilder ergebnis = new StringBuilder();
             String line;
-            String ergebnis = "";
             while ((line = reader.readLine()) != null) {
-                ergebnis += line+"\n";
+                ergebnis.append(line).append("\n");
             }
-            if(name.equals("fragenUantworten")) {
-                file.delete();
-            }
-            return ergebnis;
-        }catch (IOException e) {
+            return ergebnis.toString().trim();
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return "";
         }
     }
+
 }
