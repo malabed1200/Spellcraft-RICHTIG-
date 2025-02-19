@@ -50,7 +50,6 @@ public class ChooseGameView extends JFrameE {
         int buttonWidth = 300;
         int buttonHeight = 40;
 
-        addQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
         removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
         backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
