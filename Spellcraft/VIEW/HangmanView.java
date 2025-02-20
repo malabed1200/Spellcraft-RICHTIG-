@@ -1,5 +1,6 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import MODEL.HangmanModel;
 import MODEL.Statistics;
 import VIEW.MORE.Button;
@@ -96,8 +97,8 @@ public class HangmanView extends JFrame {
     }
 
     private void goToMainMenu() {
-        this.dispose();
-        //new MainMenu(statistics); // Zurück zum Hauptmenü mit gespeicherten Statistiken
+        this.dispose();  // Schließt das Hangman-Fenster
+        new PlayMenu(new HauptController(), statistics);  // Öffnet das PlayMenu mit der bestehenden Statistik
     }
 
     public void updateView() {

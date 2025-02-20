@@ -1,5 +1,6 @@
 package VIEW;
 
+import CONTROLLER.HauptController;
 import MODEL.PlayMenuModel;
 import MODEL.Question;
 import MODEL.QuestionManager;
@@ -56,12 +57,12 @@ public class QuizView extends JFrame {
         backgroundPanel.add(submitButton);
 
         // Zurück-Button
-        backButton = buttonFactory.createButton("Zurück");
-        backButton.setBounds(50, 500, 120, 40);
+        JButton backButton = buttonFactory.createButton("Zurück");
         backButton.addActionListener(e -> {
-            dispose();
-            //new PlayMenuModel(statistics);
+            dispose();  // QuizView schließen
+            new PlayMenu(new HauptController(), statistics);  // Zurück zum PlayMenu
         });
+
         backgroundPanel.add(backButton);
 
         setVisible(true);

@@ -1,14 +1,20 @@
 package VIEW;
 
+import CONTROLLER.HangmanController;
 import CONTROLLER.HauptController;
+import CONTROLLER.QuizController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import MODEL.Statistics;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class PlayMenu extends JFrameE {
-    public PlayMenu(HauptController controller) {
+    private Statistics statistics;  // Statistik speichern
+
+    public PlayMenu(HauptController controller, Statistics statistics) {
+        this.statistics = statistics;
+
         setTitle("Play Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -20,16 +26,23 @@ public class PlayMenu extends JFrameE {
 
         Button buttonFactory = new Button();
         JButton hangmanButton = buttonFactory.createButton("Hangman");
-        hangmanButton.setActionCommand("Play Hangman");
-        hangmanButton.addActionListener(controller);
+        hangmanButton.addActionListener(e -> {
+            dispose();  // Schließt PlayMenu
+            new HangmanController(statistics).startGame();  // Startet Hangman über den Controller
+        });
 
         JButton quizButton = buttonFactory.createButton("Quiz");
-        quizButton.setActionCommand("Play Quiz");
-        quizButton.addActionListener(controller);
+        quizButton.addActionListener(e -> {
+            dispose();  // Schließt PlayMenu
+            new QuizController(statistics).startGame();  // Startet das Quiz über den Controller
+        });
 
         JButton backButton = buttonFactory.createButton("Back");
-        backButton.setActionCommand("BackH");
-        backButton.addActionListener(controller);
+        backButton.addActionListener(e -> {
+            dispose();  // PlayMenu schließen
+            new MainMenu(controller);  // Zurück zum MainMenu
+        });
+
 
         backgroundPanel.add(hangmanButton);
         backgroundPanel.add(quizButton);

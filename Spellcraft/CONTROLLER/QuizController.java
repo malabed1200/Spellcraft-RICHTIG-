@@ -7,8 +7,11 @@ public class QuizController {
     private Statistics statistics;
     private QuizView view;
 
-    public QuizController() {
-        this.statistics = new Statistics();
+    public QuizController(Statistics statistics) {
+        this.statistics = statistics;
+    }
+
+    public void startGame() {
         this.view = new QuizView(statistics);
         view.setVisible(true);
     }

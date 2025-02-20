@@ -3,6 +3,7 @@ package VIEW;
 import MODEL.Statistics;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import CONTROLLER.HauptController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,30 +40,24 @@ public class StatisticsView extends JFrameE {
 
         // Diagramm (Rechts)
         JPanel chartPanel = new PieChartPanel(statistics);
-        chartPanel.setBounds(450, 100, 250, 250);
+        chartPanel.setBounds(450, 100, 250, 250); // Position und Größe des Diagramms
         backgroundPanel.add(chartPanel);
 
         // Zurück-Button unten links
         Button buttonFactory = new Button();
         JButton backButton = buttonFactory.createButton("Zurück");
-        backButton.setBounds(50, 500, 120, 40);
         backButton.addActionListener(e -> {
-            dispose();
+            dispose();  // StatisticsView schließen
+            new PlayMenu(new HauptController(), statistics);  // Zurück zum PlayMenu
         });
+
 
         backgroundPanel.add(backButton);
 
         setVisible(true);
     }
 
-    // Muss implementiert werden, da es in JFrameE als abstrakt deklariert ist
-    @Override
-    public void updateTextAnswer() {
-        // Hier gibt es keine Texteingabe, daher bleibt die Methode leer
-    }
+    public void updateTextAnswer() {}
 
-    @Override
-    public JTextField[] getTextfield() {
-        return new JTextField[0]; // Ein leeres Array zurückgeben, weil dieses Menü keine Textfelder hat
-    }
+    public JTextField[] getTextfield() { return null; }
 }

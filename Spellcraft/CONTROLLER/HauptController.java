@@ -22,30 +22,32 @@ public class HauptController implements ActionListener {
 
     public HauptController() {
 
-        currentFrame = new MainMenu(this);
         this.statistics = new Statistics();
+        currentFrame = new MainMenu(this);
+
     }
 
-    public static void main(String[] args) {HauptController haupt = new HauptController();}
+    public static void main(String[] args) {new HauptController();}
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Play":
                 currentFrame.dispose();
-                currentFrame = new PlayMenu(this);
+                currentFrame = new PlayMenu(this, statistics);  // Statistik übergeben
                 break;
+
             case "Stats":
                 currentFrame.dispose();
                 currentFrame = new StatisticsView(statistics);
                 break;
             case "Options":
                 currentFrame.dispose();
-                currentFrame=new OptionsMenu(this);
+                currentFrame = new OptionsMenu(this);
                 break;
             case "BackH":
                 currentFrame.dispose();
-                currentFrame=new MainMenu(this);
+                currentFrame = new MainMenu(this);
                 break;
             case "Back":
                 currentFrame.dispose();

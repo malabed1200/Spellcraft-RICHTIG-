@@ -9,9 +9,12 @@ public class HangmanController {
     private Statistics statistics;
     private HangmanView view;
 
-    public HangmanController() {
+    public HangmanController(Statistics statistics) {
         this.model = new HangmanModel();
-        this.statistics = new Statistics();
+        this.statistics = statistics;
+    }
+
+    public void startGame() {
         this.view = new HangmanView(model, statistics);
         view.setVisible(true);
     }
