@@ -12,69 +12,79 @@ import java.awt.event.ActionListener;
 
 public class HauptController implements ActionListener {
     private JFrameE currentFrame;
-    private String addQu="";
-    private String addAns="";
-    private String index="-1";
+    private String addQu = "";
+    private String addAns = "";
+    private String index = "-1";
     private Statistics statistics;
-
     private QuestionManager questionManager;
 
-
     public HauptController() {
-
         this.statistics = new Statistics();
         currentFrame = new MainMenu(this);
-
     }
 
-    public static void main(String[] args) {new HauptController();}
+    public static void main(String[] args) {
+        new HauptController();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Play":
                 currentFrame.dispose();
-                currentFrame = new PlayMenu(this, statistics);  // Statistik übergeben
+                currentFrame = new PlayMenu(this, statistics);
                 break;
 
             case "Stats":
                 currentFrame.dispose();
                 currentFrame = new StatisticsView(statistics);
                 break;
+
             case "Options":
                 currentFrame.dispose();
                 currentFrame = new OptionsMenu(this);
                 break;
+
             case "BackH":
                 currentFrame.dispose();
                 currentFrame = new MainMenu(this);
                 break;
+
             case "Back":
                 currentFrame.dispose();
-                currentFrame=new OptionsMenu(this);
+                currentFrame = new OptionsMenu(this);
                 questionManager.saveQuestions();
                 break;
+
             case "Add Question":
-                questionManager=new QuestionManager();
+                questionManager = new QuestionManager();
                 currentFrame.dispose();
-                currentFrame=new QuestionAddMenu(this);
+                currentFrame = new QuestionAddMenu(this);
                 addDocumentListenerQuAdd();
                 break;
+
             case "Remove Question":
-                questionManager=new QuestionManager();
+                questionManager = new QuestionManager();
                 currentFrame.dispose();
-                currentFrame=new QuestionRemoveMenu(this);
+                currentFrame = new QuestionRemoveMenu(this);
                 addDocumentListenerQuRemove();
                 break;
+
             case "Add":
-                String antwort=questionManager.addQuestion(addQu, addAns);
-                JOptionPane.showMessageDialog(currentFrame,antwort);
+                String antwort = questionManager.addQuestion(addQu, addAns);
+                JOptionPane.showMessageDialog(currentFrame, antwort);
                 currentFrame.updateTextAnswer();
                 break;
+
             case "Remove":
-                String antwort1=questionManager.removeQuestion(index);
-                JOptionPane.showMessageDialog(currentFrame,antwort1);
+                String antwort1 = questionManager.removeQuestion(index);
+                JOptionPane.showMessageDialog(currentFrame, antwort1);
                 currentFrame.updateTextAnswer();
+                break;
+
+            case "Quiz":
+                currentFrame.dispose();
+                new QuizController(statistics); // Startet das Quiz mit dem QuizController
                 break;
         }
     }

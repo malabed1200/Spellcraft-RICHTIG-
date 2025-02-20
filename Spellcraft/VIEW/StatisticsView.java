@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class StatisticsView extends JFrameE {
     private Statistics statistics;
+    private JButton backButton;
 
     public StatisticsView(Statistics statistics) {
         this.statistics = statistics;
@@ -17,14 +18,14 @@ public class StatisticsView extends JFrameE {
         setTitle("Statistiken");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        setLayout(new BorderLayout());
 
         // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
-        // Statistiken anzeigen (Links)
+        // Statistiken anzeigen
         JLabel correctLabel = new JLabel("Richtige Antworten: " + statistics.getCorrect());
         correctLabel.setForeground(Color.WHITE);
         correctLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -38,23 +39,24 @@ public class StatisticsView extends JFrameE {
         backgroundPanel.add(correctLabel);
         backgroundPanel.add(incorrectLabel);
 
-        // Diagramm (Rechts)
+        // Diagramm
         JPanel chartPanel = new PieChartPanel(statistics);
-        chartPanel.setBounds(450, 100, 250, 250); // Position und Größe des Diagramms
+        chartPanel.setBounds(450, 100, 250, 250);
         backgroundPanel.add(chartPanel);
 
         // Zurück-Button unten links
         Button buttonFactory = new Button();
-        JButton backButton = buttonFactory.createButton("Zurück");
-        backButton.addActionListener(e -> {
-            dispose();  // StatisticsView schließen
-            new PlayMenu(new HauptController(), statistics);  // Zurück zum PlayMenu
-        });
-
-
+        backButton = buttonFactory.createButton("Zurück");
+        backButton.setBounds(50, 500, 120, 40);
+        backButton.addActionListener(e -> goToPlayMenu());
         backgroundPanel.add(backButton);
 
         setVisible(true);
+    }
+
+    private void goToPlayMenu() {
+        dispose(); // Schließt das Statistik-Fenster
+        new PlayMenu(new HauptController(), statistics); // Öffnet das PlayMenu
     }
 
     public void updateTextAnswer() {}

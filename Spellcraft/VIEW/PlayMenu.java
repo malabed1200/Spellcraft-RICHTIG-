@@ -32,16 +32,13 @@ public class PlayMenu extends JFrameE {
         });
 
         JButton quizButton = buttonFactory.createButton("Quiz");
-        quizButton.addActionListener(e -> {
-            dispose();  // Schließt PlayMenu
-            new QuizController(statistics).startGame();  // Startet das Quiz über den Controller
-        });
+        quizButton.setActionCommand("Quiz");
+        quizButton.addActionListener(controller);
+
 
         JButton backButton = buttonFactory.createButton("Back");
-        backButton.addActionListener(e -> {
-            dispose();  // PlayMenu schließen
-            new MainMenu(controller);  // Zurück zum MainMenu
-        });
+        backButton.setActionCommand("BackH");
+        backButton.addActionListener(controller);
 
 
         backgroundPanel.add(hangmanButton);

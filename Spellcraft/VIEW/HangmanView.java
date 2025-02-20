@@ -1,6 +1,6 @@
 package VIEW;
 
-import CONTROLLER.HauptController;
+import CONTROLLER.HangmanController;
 import MODEL.HangmanModel;
 import MODEL.Statistics;
 import VIEW.MORE.Button;
@@ -14,11 +14,13 @@ public class HangmanView extends JFrame {
     private HangmanPanel hangmanPanel;
     private HangmanModel model;
     private Statistics statistics;
-    private JButton backButton;
+    private JButton backButton, resetButton;
+    private HangmanController controller;
 
-    public HangmanView(HangmanModel model, Statistics statistics) {
-        this.model = model;
+    public HangmanView(HangmanController controller, Statistics statistics) {
+        this.controller = controller;
         this.statistics = statistics;
+        this.model = new HangmanModel();
 
         setTitle("Hangman Game");
         setSize(800, 700);
@@ -34,11 +36,12 @@ public class HangmanView extends JFrame {
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(categoryLabel, BorderLayout.CENTER);
 
-        // Zurück-Button oben links
+        // Zurück-Button
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("Zurück");
         backButton.setPreferredSize(new Dimension(100, 30));
-        backButton.addActionListener(e -> goToMainMenu());
+        backButton.setActionCommand("Back");
+        backButton.addActionListener(controller);
         topPanel.add(backButton, BorderLayout.WEST);
 
         add(topPanel, BorderLayout.NORTH);
@@ -47,62 +50,30 @@ public class HangmanView extends JFrame {
         hangmanPanel = new HangmanPanel(model);
         add(hangmanPanel, BorderLayout.CENTER);
 
-        // Tastatur unten
+        // Tastatur unten (Events durch Controller)
         keyboardPanel = new JPanel(new GridLayout(4, 7));
         addKeyboard();
         add(keyboardPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
     }
 
     private void addKeyboard() {
         for (char c = 'A'; c <= 'Z'; c++) {
             JButton button = new JButton(String.valueOf(c));
             button.setFont(new Font("Arial", Font.BOLD, 18));
-            char finalC = c;
-            button.addActionListener(e -> processGuess(finalC, button));
+            button.setActionCommand("Letter_" + c);
+            button.addActionListener(controller);
             keyboardPanel.add(button);
         }
-    }
-
-    private void processGuess(char letter, JButton button) {
-        boolean correct = model.guessLetter(letter);
-        button.setBackground(correct ? Color.GREEN : Color.RED);
-        button.setEnabled(false);
-        updateView();
-        checkGameStatus();
-    }
-
-    private void checkGameStatus() {
-        if (model.isWin()) {
-            JOptionPane.showMessageDialog(this, "Glückwunsch! Du hast gewonnen!");
-            statistics.incrementCorrect(); // Richtige Antwort speichern
-            resetGame();
-        } else if (model.isGameOver()) {
-            JOptionPane.showMessageDialog(this, "Game Over! Das Wort war: " + model.getWord());
-            statistics.incrementIncorrect(); // Falsche Antwort speichern
-            resetGame();
-        }
-    }
-
-    private void resetGame() {
-        model.resetGame();
-        updateView();
-        resetKeyboard();
-    }
-
-    private void resetKeyboard() {
-        keyboardPanel.removeAll();
-        addKeyboard();
-        keyboardPanel.revalidate();
-        keyboardPanel.repaint();
-    }
-
-    private void goToMainMenu() {
-        this.dispose();  // Schließt das Hangman-Fenster
-        new PlayMenu(new HauptController(), statistics);  // Öffnet das PlayMenu mit der bestehenden Statistik
     }
 
     public void updateView() {
         categoryLabel.setText("ANIMALS - " + model.getMaskedWord());
         hangmanPanel.repaint();
+    }
+
+    public HangmanModel getModel() {
+        return model;
     }
 }
