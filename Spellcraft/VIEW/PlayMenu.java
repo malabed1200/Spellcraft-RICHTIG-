@@ -1,8 +1,6 @@
 package VIEW;
 
-import CONTROLLER.HangmanController;
 import CONTROLLER.HauptController;
-import CONTROLLER.QuizController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import MODEL.Statistics;
@@ -10,7 +8,7 @@ import MODEL.Statistics;
 import javax.swing.*;
 
 public class PlayMenu extends JFrameE {
-    private Statistics statistics;  // Statistik speichern
+    private Statistics statistics;
 
     public PlayMenu(HauptController controller, Statistics statistics) {
         this.statistics = statistics;
@@ -26,33 +24,30 @@ public class PlayMenu extends JFrameE {
 
         Button buttonFactory = new Button();
         JButton hangmanButton = buttonFactory.createButton("Hangman");
-        hangmanButton.addActionListener(e -> {
-            dispose();  // Schließt PlayMenu
-            new HangmanController(statistics).startGame();  // Startet Hangman über den Controller
-        });
+        hangmanButton.setActionCommand("Hangman");
+        hangmanButton.addActionListener(controller);
 
         JButton quizButton = buttonFactory.createButton("Quiz");
         quizButton.setActionCommand("Quiz");
         quizButton.addActionListener(controller);
 
-
         JButton backButton = buttonFactory.createButton("Back");
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
-
 
         backgroundPanel.add(hangmanButton);
         backgroundPanel.add(quizButton);
         backgroundPanel.add(backButton);
 
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
+        setLayout(null);
         int buttonWidth = 300;
         int buttonHeight = 40;
+        int centerX = (getWidth() - buttonWidth) / 2;
+        int centerY = (getHeight() - buttonHeight) / 2;
 
-        hangmanButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
-        quizButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
-        backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
+        hangmanButton.setBounds(centerX, centerY - 80, buttonWidth, buttonHeight);
+        quizButton.setBounds(centerX, centerY - 20, buttonWidth, buttonHeight);
+        backButton.setBounds(centerX, centerY + 40, buttonWidth, buttonHeight);
 
         setVisible(true);
     }

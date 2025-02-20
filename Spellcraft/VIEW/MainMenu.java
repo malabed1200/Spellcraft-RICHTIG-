@@ -3,23 +3,21 @@ package VIEW;
 import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
-import MODEL.PlayMenuModel;
-import MODEL.Statistics;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainMenu extends JFrameE {
 
     public MainMenu(HauptController controller) {
-        // Hauptfenster
         setTitle("SPELLCRAFT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-        setLayout(null);
+        setLayout(new BorderLayout());
 
-        // Hintergrund
+        // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Main_Menu.png");
-        backgroundPanel.setLayout(null);
+        backgroundPanel.setLayout(new GridBagLayout()); // GridBagLayout ermöglicht zentrierte Skalierung
         setContentPane(backgroundPanel);
 
         // Buttons erstellen
@@ -36,25 +34,25 @@ public class MainMenu extends JFrameE {
         optionsButton.setActionCommand("Options");
         optionsButton.addActionListener(controller);
 
-        // Buttons hinzufügen
-        backgroundPanel.add(playButton);
-        backgroundPanel.add(statsButton);
-        backgroundPanel.add(optionsButton);
+        // Panel für die Buttons
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10)); // 3 Reihen, 1 Spalte, 10 Pixel Abstand
+        buttonPanel.setOpaque(false); // Hintergrund durchsichtig
+        buttonPanel.add(playButton);
+        buttonPanel.add(statsButton);
+        buttonPanel.add(optionsButton);
 
-        // Button-Größe & Position
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
-        int buttonWidth = 300;
-        int buttonHeight = 40;
+        // Zentrieren mit GridBagConstraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        backgroundPanel.add(buttonPanel, gbc);
 
-        playButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 60, buttonWidth, buttonHeight);
-        statsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-        optionsButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
-
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Startet direkt im Fullscreen-Modus
         setVisible(true);
     }
 
-    public void updateTextAnswer(){}
+    public void updateTextAnswer() {}
 
-    public JTextField[] getTextfield(){return null;}
+    public JTextField[] getTextfield() { return null; }
 }
