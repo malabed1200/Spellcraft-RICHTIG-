@@ -1,32 +1,27 @@
 package MODEL;
-import java.util.ArrayList;
-import java.util.List;
 
-// Klasse zur Verwaltung einzelner Fragen
-public class Question{
-
+public class Question {
     private String questionText;
-    private String answer;
+    private String correctAnswer;
 
-    public Question(String questionText, String answer) {
+    public Question(String questionText, String correctAnswer) {
         this.questionText = questionText;
-        this.answer = answer;
+        this.correctAnswer = correctAnswer;
     }
 
-    public String getQuestion() {
-        return "Q: "+questionText+"\nA: "+answer;
-    }
-
-    public String getQuestionText() {
+    public String getQuestionText() {  // **Diese Methode wird gebraucht!**
         return questionText;
     }
 
-    public boolean checkAnswer(String input) {
-        return input.equals(answer);
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public String getData(){
-        String data="&???"+questionText+"???"+"!!!"+answer+"!!!&";
-        return data;
+    public boolean checkAnswer(String userAnswer) {
+        return correctAnswer.equalsIgnoreCase(userAnswer);
+    }
+
+    public String getData() {
+        return "&???"+questionText+"???!!!"+correctAnswer+"!!!&";
     }
 }

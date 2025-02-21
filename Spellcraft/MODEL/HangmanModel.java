@@ -13,9 +13,6 @@ public class HangmanModel {
     private final Set<Character> guessedLetters = new HashSet<>();
     private int wrongGuesses = 0;
 
-    // Statistik-Objekt erstellen
-    private Statistics statistics = new Statistics();
-
     public String getMaskedWord() {
         StringBuilder maskedWord = new StringBuilder();
         for (char c : word.toCharArray()) {
@@ -31,11 +28,9 @@ public class HangmanModel {
     public boolean guessLetter(char letter) {
         if (word.contains(String.valueOf(letter))) {
             guessedLetters.add(letter);
-            statistics.incrementCorrect(); // Richtig geraten -> Statistik updaten
             return true;
         } else {
             wrongGuesses++;
-            statistics.incrementIncorrect(); // Falsch geraten -> Statistik updaten
             return false;
         }
     }
@@ -59,13 +54,5 @@ public class HangmanModel {
 
     public String getWord() {
         return word;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public Statistics getStatistics() {
-        return statistics;
     }
 }
