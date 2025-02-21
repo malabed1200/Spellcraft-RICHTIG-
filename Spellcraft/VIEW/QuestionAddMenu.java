@@ -27,11 +27,11 @@ public class QuestionAddMenu extends JFrameE {
 
         // Buttons hinzufügen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("Add");
+        JButton button1 = buttonFactory.createButton("HINZUFÜGEN");
         button1.setActionCommand("Add");
         button1.addActionListener(controller);
 
-        JButton button2 = buttonFactory.createButton("Back");
+        JButton button2 = buttonFactory.createButton("ZURÜCK");
         button2.setActionCommand("Back");
         button2.addActionListener(controller);
 
@@ -40,11 +40,11 @@ public class QuestionAddMenu extends JFrameE {
         backgroundPanel.add(button2);
 
         // Erstellen des Textfeldes & JLabels
-        textField = new CustomTextField("Question");
+        textField = new CustomTextField("FRAGE");
         backgroundPanel.add(textField);
 
         // Erstellen des Textfeldes & JLabels
-        textField1 = new CustomTextField("Answer");
+        textField1 = new CustomTextField("ANTWORT");
         backgroundPanel.add(textField1);
 
         int windowWidth = getWidth();

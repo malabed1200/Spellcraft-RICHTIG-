@@ -64,12 +64,12 @@ public class GuessThePic extends JFrame {
 
         // Button Factory nutzen
         Button buttonFactory = new Button();
-        JButton guess = buttonFactory.createButton("Guess");
+        JButton guess = buttonFactory.createButton("RATE");
         guess.setActionCommand("Guess");
         guess.addActionListener(controller);
 
         // Erstellen des Textfeldes & JLabels
-        eingabe = new CustomTextField("Eingabe");
+        eingabe = new CustomTextField("EINGABE");
         backgroundPanel.add(eingabe);
 
         // Buttons hinzufügen

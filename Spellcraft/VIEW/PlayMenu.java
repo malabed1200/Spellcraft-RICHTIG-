@@ -25,19 +25,19 @@ public class PlayMenu extends JFrameE {
         setContentPane(backgroundPanel);
 
         Button buttonFactory = new Button();
-        JButton hangmanButton = buttonFactory.createButton("Hangman");
+        JButton hangmanButton = buttonFactory.createButton("HANGMAN");
         hangmanButton.setActionCommand("Hangman");
         hangmanButton.addActionListener(controller);
 
-        JButton quizButton = buttonFactory.createButton("Quiz");
+        JButton quizButton = buttonFactory.createButton("QUIZ");
         quizButton.setActionCommand("Quiz");
         quizButton.addActionListener(controller);
 
-        JButton guessButton = buttonFactory.createButton("Guess The Pic");
+        JButton guessButton = buttonFactory.createButton("ERRATE DAS BILD");
         guessButton.setActionCommand("GuessThePic");
         guessButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("Back");
+        JButton backButton = buttonFactory.createButton("ZURÜCK");
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
 
