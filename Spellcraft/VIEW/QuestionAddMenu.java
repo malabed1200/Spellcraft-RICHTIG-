@@ -62,6 +62,7 @@ public class QuestionAddMenu extends JFrameE {
         button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 90, buttonWidth, buttonHeight);
 
         // Frame anzeigen
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 

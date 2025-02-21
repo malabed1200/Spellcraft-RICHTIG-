@@ -34,7 +34,7 @@ public class HauptController implements ActionListener {
         switch (e.getActionCommand()) {
             case "Play":
                 currentFrame.dispose();
-                currentFrame = new PlayMenu(this);
+                currentFrame = new PlayMenu(this,statistics);
                 break;
             case "Stats":
                 currentFrame.dispose();

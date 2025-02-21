@@ -49,6 +49,7 @@ public class OptionsMenu extends JFrameE {
         removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
         backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
