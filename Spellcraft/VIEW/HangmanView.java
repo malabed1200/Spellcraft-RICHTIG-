@@ -9,35 +9,36 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HangmanView extends JFrame {
-    private JLabel wordLabel, categoryLabel;
+    private JLabel categoryLabel;
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
-
-    private JButton backButton, resetButton;
+    private HangmanModel model;
+    private Statistics statistics;
+    private JButton backButton;
     private HangmanController controller;
 
-    public HangmanView(HangmanController controller) {
+    public HangmanView(HangmanController controller, Statistics statistics) {
         this.controller = controller;
+        this.statistics = statistics;
+        this.model = controller.getModel();
 
         setTitle("Hangman Game");
         setSize(800, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        setLocationRelativeTo(null);
-
         // Oberer Bereich mit Kategorie und Zurück-Button
         JPanel topPanel = new JPanel(new BorderLayout());
-        categoryLabel = new JLabel("", SwingConstants.CENTER);
+        categoryLabel = new JLabel("ANIMALS - " + model.getMaskedWord(), SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setBackground(Color.ORANGE);
         categoryLabel.setForeground(Color.WHITE);
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(categoryLabel, BorderLayout.CENTER);
 
-        // Zurück-Button
+        // Zurück-Button mit ActionCommand für den Controller
         Button buttonFactory = new Button();
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setPreferredSize(new Dimension(100, 30));
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller);
@@ -46,7 +47,7 @@ public class HangmanView extends JFrame {
         add(topPanel, BorderLayout.NORTH);
 
         // Hangman-Panel (Zeichnung)
-        hangmanPanel = new HangmanPanel();
+        hangmanPanel = new HangmanPanel(model);
         add(hangmanPanel, BorderLayout.CENTER);
 
         // Tastatur unten (Events durch Controller)
@@ -67,13 +68,12 @@ public class HangmanView extends JFrame {
         }
     }
 
-    public void updateView(String text, int wrongGuesses) {
-        categoryLabel.setText(text);
-        if(wrongGuesses>0){hangmanPanel.addWrongGuesses();}
+    public void updateView() {
+        categoryLabel.setText("ANIMALS - " + model.getMaskedWord());
         hangmanPanel.repaint();
     }
 
-    public void setCategoryLabel(String text){
-        this.categoryLabel.setText(text);
+    public HangmanModel getModel() {
+        return model;
     }
 }
