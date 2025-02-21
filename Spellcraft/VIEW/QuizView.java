@@ -31,6 +31,8 @@ public class QuizView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        setLocationRelativeTo(null);
+
         // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
         backgroundPanel.setLayout(null);

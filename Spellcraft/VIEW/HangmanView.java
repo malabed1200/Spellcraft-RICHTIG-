@@ -12,24 +12,23 @@ public class HangmanView extends JFrame {
     private JLabel wordLabel, categoryLabel;
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
-    private HangmanModel model;
-    private Statistics statistics;
+
     private JButton backButton, resetButton;
     private HangmanController controller;
 
-    public HangmanView(HangmanController controller, Statistics statistics) {
+    public HangmanView(HangmanController controller) {
         this.controller = controller;
-        this.statistics = statistics;
-        this.model = new HangmanModel();
 
         setTitle("Hangman Game");
         setSize(800, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        setLocationRelativeTo(null);
+
         // Oberer Bereich mit Kategorie und Zurück-Button
         JPanel topPanel = new JPanel(new BorderLayout());
-        categoryLabel = new JLabel("ANIMALS - " + model.getMaskedWord(), SwingConstants.CENTER);
+        categoryLabel = new JLabel("", SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setBackground(Color.ORANGE);
         categoryLabel.setForeground(Color.WHITE);
@@ -47,7 +46,7 @@ public class HangmanView extends JFrame {
         add(topPanel, BorderLayout.NORTH);
 
         // Hangman-Panel (Zeichnung)
-        hangmanPanel = new HangmanPanel(model);
+        hangmanPanel = new HangmanPanel();
         add(hangmanPanel, BorderLayout.CENTER);
 
         // Tastatur unten (Events durch Controller)
@@ -68,12 +67,13 @@ public class HangmanView extends JFrame {
         }
     }
 
-    public void updateView() {
-        categoryLabel.setText("ANIMALS - " + model.getMaskedWord());
+    public void updateView(String text, int wrongGuesses) {
+        categoryLabel.setText(text);
+        if(wrongGuesses>0){hangmanPanel.addWrongGuesses();}
         hangmanPanel.repaint();
     }
 
-    public HangmanModel getModel() {
-        return model;
+    public void setCategoryLabel(String text){
+        this.categoryLabel.setText(text);
     }
 }

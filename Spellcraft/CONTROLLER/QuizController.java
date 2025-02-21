@@ -4,14 +4,18 @@ import MODEL.Statistics;
 import VIEW.PlayMenu;
 import VIEW.QuizView;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class QuizController implements ActionListener {
     private Statistics statistics;
     private QuizView view;
+    private HauptController hc;
 
-    public QuizController(Statistics statistics) {
+    public QuizController(HauptController hc, Statistics statistics) {
+        this.hc = hc;
+
         this.statistics = statistics;
         this.view = new QuizView(this, statistics);
     }
@@ -23,9 +27,16 @@ public class QuizController implements ActionListener {
                 view.checkAnswer();
                 break;
             case "Back":
-                view.dispose();
-                new PlayMenu(new HauptController(), statistics); // Zurück zum PlayMenu
+                shutdown();// Zurück zum PlayMenu
                 break;
         }
+    }
+
+    public void shutdown() {
+        for (Window window : Window.getWindows()) {
+            window.dispose();
+        }
+        view = null;
+        hc.startHC();
     }
 }

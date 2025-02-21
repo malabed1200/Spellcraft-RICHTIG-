@@ -12,13 +12,15 @@ public class StatisticsView extends JFrameE {
     private Statistics statistics;
     private JButton backButton;
 
-    public StatisticsView(Statistics statistics) {
-        this.statistics = statistics;
+    public StatisticsView(HauptController controller) {
+        this.statistics = new Statistics();
 
         setTitle("Statistiken");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
@@ -48,7 +50,8 @@ public class StatisticsView extends JFrameE {
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(50, 500, 120, 40);
-        backButton.addActionListener(e -> goToPlayMenu());
+        backButton.setActionCommand("BackH");
+        backButton.addActionListener(controller);
         backgroundPanel.add(backButton);
 
         setVisible(true);

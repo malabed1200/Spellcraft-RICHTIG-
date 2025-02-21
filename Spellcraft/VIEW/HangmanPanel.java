@@ -11,12 +11,15 @@ import java.util.Set;
 
 // HangmanPanel: Zeichnet den Hangman
 class HangmanPanel extends JPanel {
-    private HangmanModel model;
     private ImageIcon background;
+    private int wrongG=0;
 
-    public HangmanPanel(HangmanModel model) {
-        this.model = model;
+    public HangmanPanel() {
         this.background = new ImageIcon("Spellcraft/Bilder/Hangman Hintergrundsbild.jpg");
+    }
+
+    public void addWrongGuesses() {
+        this.wrongG+=1;
     }
 
     @Override
@@ -34,11 +37,11 @@ class HangmanPanel extends JPanel {
         g.drawLine(centerX - 20, 180, centerX + 20, 180);
         g.drawLine(centerX + 20, 180, centerX + 20, 210);
 
-        if (model.getWrongGuesses() > 0) g.fillOval(centerX, 210, 30, 30);
-        if (model.getWrongGuesses() > 1) g.drawLine(centerX + 15, 240, centerX + 15, 290);
-        if (model.getWrongGuesses() > 2) g.drawLine(centerX + 15, 250, centerX - 20, 280);
-        if (model.getWrongGuesses() > 3) g.drawLine(centerX + 15, 250, centerX + 50, 280);
-        if (model.getWrongGuesses() > 4) g.drawLine(centerX + 15, 290, centerX - 20, 330);
-        if (model.getWrongGuesses() > 5) g.drawLine(centerX + 15, 290, centerX + 50, 330);
+        if (wrongG > 0) g.fillOval(centerX, 210, 30, 30);
+        if (wrongG > 1) g.drawLine(centerX + 15, 240, centerX + 15, 290);
+        if (wrongG > 2) g.drawLine(centerX + 15, 250, centerX - 20, 280);
+        if (wrongG > 3) g.drawLine(centerX + 15, 250, centerX + 50, 280);
+        if (wrongG > 4) g.drawLine(centerX + 15, 290, centerX - 20, 330);
+        if (wrongG > 5) g.drawLine(centerX + 15, 290, centerX + 50, 330);
     }
 }

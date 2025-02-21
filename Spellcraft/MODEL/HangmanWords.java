@@ -23,15 +23,15 @@ public class HangmanWords extends Manager{
         Matcher matcher = pattern.matcher(data);
 
         while (matcher.find()) {
-            String c1 = matcher.group("Frage");
+            String c1 = matcher.group("Antwort");
 
             words.add(c1);
-
-            //System.out.println("\nFrage: " + c1 + "?, Antwort:" + c2);
         }
     }
 
-    public String getWord(int index) {
+    public String getWord() {
+        int index = (int) (Math.random() * words.size());
+
         if (index >= 0 && index < words.size()) {
             return words.get(index);
         }

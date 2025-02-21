@@ -5,21 +5,28 @@ import MODEL.HangmanModel;
 import MODEL.Statistics;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HangmanController implements ActionListener {
+    HauptController hc;
+
     private HangmanModel model;
     private Statistics statistics;
     private HangmanView view;
 
-    public HangmanController(Statistics statistics) {
+    public HangmanController(HauptController hc) {
+        this.hc=hc;
+
         this.model = new HangmanModel();
-        this.statistics = statistics;
+        this.statistics = new Statistics();
+        startGame();
     }
 
     public void startGame() {
-        this.view = new HangmanView(this, statistics);
+        this.view = new HangmanView(this);
+        view.setCategoryLabel("TIERE - " + model.getMaskedWord());
         view.setVisible(true);
     }
 
@@ -29,8 +36,7 @@ public class HangmanController implements ActionListener {
 
         // Zurück-Button: Zurück ins PlayMenu
         if (command.equals("Back")) {
-            view.dispose();
-            new VIEW.PlayMenu(new HauptController(), statistics);
+            shutdown();
         }
 
         // Wenn ein Buchstabe angeklickt wurde
@@ -44,7 +50,9 @@ public class HangmanController implements ActionListener {
         boolean correct = model.guessLetter(letter);
         button.setBackground(correct ? java.awt.Color.GREEN : java.awt.Color.RED);
         button.setEnabled(false);
-        view.updateView();
+        int a=0;
+        if(!correct){a=1;}
+        view.updateView("TIERE - " + model.getMaskedWord(),a);
         checkGameStatus();
     }
 
@@ -52,16 +60,27 @@ public class HangmanController implements ActionListener {
         if (model.isWin()) {
             JOptionPane.showMessageDialog(view, "Glückwunsch! Du hast gewonnen!");
             statistics.incrementCorrect();
+            statistics.save();
             resetGame();
         } else if (model.isGameOver()) {
             JOptionPane.showMessageDialog(view, "Game Over! Das Wort war: " + model.getWord());
             statistics.incrementIncorrect();
+            statistics.save();
             resetGame();
         }
     }
 
     private void resetGame() {
-        model.resetGame();
-        view.updateView();
+        shutdown();
+    }
+
+    public void shutdown() {
+        for (Window window : Window.getWindows()) {
+            window.dispose();
+        }
+        model = null;
+        view = null;
+        statistics=null;
+        hc.startHC();
     }
 }
