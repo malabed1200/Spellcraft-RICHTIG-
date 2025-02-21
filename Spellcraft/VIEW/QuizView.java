@@ -1,6 +1,6 @@
 package VIEW;
 
-import MODEL.PlayMenuModel;
+import CONTROLLER.QuizController;
 import MODEL.Question;
 import MODEL.QuestionManager;
 import MODEL.Statistics;
@@ -18,8 +18,10 @@ public class QuizView extends JFrame {
     private JTextField answerField;
     private JButton submitButton, backButton;
     private int currentQuestionIndex = 0;
+    private QuizController controller;
 
-    public QuizView(Statistics statistics) {
+    public QuizView(QuizController controller, Statistics statistics) {
+        this.controller = controller;
         this.statistics = statistics;
         this.questionManager = new QuestionManager();
         questionManager.loadQuestions(); // Fragen laden
@@ -52,22 +54,21 @@ public class QuizView extends JFrame {
         Button buttonFactory = new Button();
         submitButton = buttonFactory.createButton("Absenden");
         submitButton.setBounds(50, 160, 120, 40);
-        submitButton.addActionListener(e -> checkAnswer());
+        submitButton.setActionCommand("Submit");
+        submitButton.addActionListener(controller);
         backgroundPanel.add(submitButton);
 
         // Zurück-Button
         backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(50, 500, 120, 40);
-        backButton.addActionListener(e -> {
-            dispose();
-            //new PlayMenuModel(statistics);
-        });
+        backButton.setActionCommand("Back");
+        backButton.addActionListener(controller);
         backgroundPanel.add(backButton);
 
         setVisible(true);
     }
 
-    private void checkAnswer() {
+    public void checkAnswer() {
         if (currentQuestion != null) {
             String userAnswer = answerField.getText().trim();
             if (currentQuestion.checkAnswer(userAnswer)) {
@@ -90,7 +91,6 @@ public class QuizView extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Quiz beendet!");
             dispose();
-            //new PlayMenuModel(statistics);
         }
     }
 }
