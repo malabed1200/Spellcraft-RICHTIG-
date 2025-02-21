@@ -15,6 +15,8 @@ public class MainMenu extends JFrameE {
         setSize(800, 600);
         setLayout(new BorderLayout());
 
+        setLocationRelativeTo(null);
+
         // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Main_Menu.png");
         backgroundPanel.setLayout(new GridBagLayout()); // GridBagLayout ermöglicht zentrierte Skalierung
@@ -48,7 +50,6 @@ public class MainMenu extends JFrameE {
         gbc.anchor = GridBagConstraints.CENTER;
         backgroundPanel.add(buttonPanel, gbc);
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Startet direkt im Fullscreen-Modus
         setVisible(true);
     }
 

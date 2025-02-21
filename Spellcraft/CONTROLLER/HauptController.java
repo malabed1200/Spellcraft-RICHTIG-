@@ -20,9 +20,11 @@ public class HauptController implements ActionListener {
 
     private QuestionManager questionManager;
 
-
     public HauptController() {
+        startHC();
+    }
 
+    public void startHC(){
         currentFrame = new MainMenu(this);
         this.statistics = new Statistics();
     }
@@ -38,7 +40,7 @@ public class HauptController implements ActionListener {
                 break;
             case "Stats":
                 currentFrame.dispose();
-                currentFrame = new StatisticsView(statistics);
+                currentFrame = new StatisticsView(this);
                 break;
             case "Options":
                 currentFrame.dispose();
@@ -75,7 +77,23 @@ public class HauptController implements ActionListener {
                 JOptionPane.showMessageDialog(currentFrame,antwort1,"",JOptionPane.INFORMATION_MESSAGE);
                 currentFrame.updateTextAnswer();
                 break;
-            case "":
+            case "Hangman":
+                new HangmanController(this);
+                statistics=null;
+                currentFrame.dispose();
+                currentFrame=null;
+                break;
+            case "GuessThePic":
+                new GuessThePicController(this);
+                statistics=null;
+                currentFrame.dispose();
+                currentFrame=null;
+                break;
+            case "Quiz":
+                new QuizController(this,null);
+                statistics=null;
+                currentFrame.dispose();
+                currentFrame=null;
                 break;
         }
     }

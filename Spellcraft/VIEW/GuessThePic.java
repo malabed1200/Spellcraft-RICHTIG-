@@ -22,6 +22,8 @@ public class GuessThePic extends JFrame {
         setSize(800, 600);
         setLayout(null);
 
+        setLocationRelativeTo(null);
+
         // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/cavewall.png");
         backgroundPanel.setLayout(null);

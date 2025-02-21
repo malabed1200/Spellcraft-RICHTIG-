@@ -15,6 +15,8 @@ public class QuestionRemoveMenu extends JFrameE {
         setSize(800, 600);
         setLayout(null);
 
+        setLocationRelativeTo(null);
+
         // Hintergrundpanel hinzufügen
         //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
@@ -56,7 +58,6 @@ public class QuestionRemoveMenu extends JFrameE {
         button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
 
         // Frame anzeigen
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 

@@ -1,6 +1,7 @@
 package CONTROLLER;
 
 import MODEL.GuessThePicModel;
+import MODEL.Statistics;
 import VIEW.GuessThePic;
 
 import javax.swing.*;
@@ -12,6 +13,8 @@ import java.awt.event.ActionListener;
 
 
 public class GuessThePicController implements ActionListener {
+    private HauptController hc;
+
     private GuessThePic guessThePic;
     private GuessThePicModel guessThePicModel;
 
@@ -20,15 +23,13 @@ public class GuessThePicController implements ActionListener {
     private int richtig=0;
     private int falsch=0;
 
-    public GuessThePicController() {
+    public GuessThePicController(HauptController hc) {
+        this.hc=hc;
+
         this.guessThePicModel = new GuessThePicModel();
         this.guessThePic = new GuessThePic(this);
         this.guessThePic.setBild(guessThePicModel.getQuestion());
         addDocumentListener();
-    }
-
-    public static void main(String[] args) {
-        GuessThePicController guessThePicController = new GuessThePicController();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -83,11 +84,16 @@ public class GuessThePicController implements ActionListener {
     }
 
     public void shutdown() {
+        Statistics statistics = new Statistics();
+        statistics.incrementCorrect(richtig);
+        statistics.incrementIncorrect(falsch);
+        statistics.save();
+
         for (Window window : Window.getWindows()) {
             window.dispose();
         }
         guessThePic = null;
         guessThePicModel = null;
-        new HauptController();
+        hc.startHC();
     }
 }

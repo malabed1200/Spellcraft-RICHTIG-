@@ -52,9 +52,18 @@ public class Statistics {
         correctAnswers++;
     }
 
+    public void incrementCorrect(int count) {
+        correctAnswers+=count;
+    }
+
     public void incrementIncorrect() {
         incorrectAnswers++;
     }
+
+    public void incrementIncorrect(int count) {
+        incorrectAnswers+=count;
+    }
+
 
     public int getCorrect() {
         return correctAnswers;

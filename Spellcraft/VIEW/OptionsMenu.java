@@ -15,6 +15,8 @@ public class OptionsMenu extends JFrameE {
         setSize(800, 600);
         setLayout(null);
 
+        setLocationRelativeTo(null);
+
         // Hintergrundbild setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
         backgroundPanel.setLayout(null);
@@ -49,7 +51,6 @@ public class OptionsMenu extends JFrameE {
         removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
         backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 

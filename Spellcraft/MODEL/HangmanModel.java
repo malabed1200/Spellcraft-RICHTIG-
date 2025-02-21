@@ -4,8 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HangmanModel {
-    private final String word = "PANDA";
+    private HangmanWords words=new HangmanWords();
+
+    private final String word=words.getWord();
+
     private final String category = "ANIMALS";
+
     private final Set<Character> guessedLetters = new HashSet<>();
     private int wrongGuesses = 0;
 
