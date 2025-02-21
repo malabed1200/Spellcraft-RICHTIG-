@@ -7,6 +7,7 @@ import VIEW.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -66,13 +67,15 @@ public class HauptController implements ActionListener {
                 break;
             case "Add":
                 String antwort=questionManager.addQuestion(addQu, addAns);
-                JOptionPane.showMessageDialog(currentFrame,antwort);
+                JOptionPane.showMessageDialog(currentFrame,antwort,"",JOptionPane.INFORMATION_MESSAGE);
                 currentFrame.updateTextAnswer();
                 break;
             case "Remove":
                 String antwort1=questionManager.removeQuestion(index);
-                JOptionPane.showMessageDialog(currentFrame,antwort1);
+                JOptionPane.showMessageDialog(currentFrame,antwort1,"",JOptionPane.INFORMATION_MESSAGE);
                 currentFrame.updateTextAnswer();
+                break;
+            case "":
                 break;
         }
     }
