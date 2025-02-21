@@ -9,18 +9,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HangmanView extends JFrame {
-    private JLabel wordLabel, categoryLabel;
+    private JLabel categoryLabel;
     private JPanel keyboardPanel;
     private HangmanPanel hangmanPanel;
     private HangmanModel model;
     private Statistics statistics;
-    private JButton backButton, resetButton;
+    private JButton backButton;
     private HangmanController controller;
 
     public HangmanView(HangmanController controller, Statistics statistics) {
         this.controller = controller;
         this.statistics = statistics;
-        this.model = new HangmanModel();
+        this.model = controller.getModel();
 
         setTitle("Hangman Game");
         setSize(800, 700);
@@ -36,7 +36,7 @@ public class HangmanView extends JFrame {
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(categoryLabel, BorderLayout.CENTER);
 
-        // Zurück-Button
+        // Zurück-Button mit ActionCommand für den Controller
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("Zurück");
         backButton.setPreferredSize(new Dimension(100, 30));

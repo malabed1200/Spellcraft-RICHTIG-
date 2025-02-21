@@ -60,7 +60,8 @@ public class QuestionManager extends Manager{
             Question qu=new Question(question, answer);
             questions.add(qu);
             difference = true;
-            ruckGabe="Frage wurde hinzugefügt:\n"+qu.getQuestion();
+            ruckGabe="Frage wurde hinzugefügt:\n" + qu.getQuestionText();
+
         }
         return ruckGabe;
     }

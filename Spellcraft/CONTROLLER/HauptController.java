@@ -34,7 +34,8 @@ public class HauptController implements ActionListener {
         switch (e.getActionCommand()) {
             case "Play":
                 currentFrame.dispose();
-                currentFrame = new PlayMenu(this);
+                currentFrame = new PlayMenu(this, statistics);
+
                 break;
             case "Stats":
                 currentFrame.dispose();
@@ -76,6 +77,14 @@ public class HauptController implements ActionListener {
                 currentFrame.updateTextAnswer();
                 break;
             case "":
+                break;
+            case "StartHangman":   // Hangman starten
+                currentFrame.dispose();
+                new HangmanController(statistics).startGame();
+                break;
+            case "StartQuiz":   // Quiz starten
+                currentFrame.dispose();
+                new QuizController(statistics).startGame();
                 break;
         }
     }

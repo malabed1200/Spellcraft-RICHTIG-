@@ -3,11 +3,6 @@ import MODEL.HangmanModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
-
 
 // HangmanPanel: Zeichnet den Hangman
 class HangmanPanel extends JPanel {

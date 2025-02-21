@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HangmanController implements ActionListener {
+public class HangmanController implements ActionListener {  // Hier ActionListener implementieren
     private HangmanModel model;
     private Statistics statistics;
     private HangmanView view;
@@ -23,19 +23,21 @@ public class HangmanController implements ActionListener {
         view.setVisible(true);
     }
 
+    public HangmanModel getModel() {
+        return model;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
-        // Zurück-Button: Zurück ins PlayMenu
-        if (command.equals("Back")) {
+        if ("Back".equals(command)) {
             view.dispose();
             new VIEW.PlayMenu(new HauptController(), statistics);
         }
 
-        // Wenn ein Buchstabe angeklickt wurde
         if (command.startsWith("Letter_")) {
-            char letter = command.charAt(7); // Buchstabe nach "Letter_"
+            char letter = command.charAt(7);
             processGuess(letter, (JButton) e.getSource());
         }
     }

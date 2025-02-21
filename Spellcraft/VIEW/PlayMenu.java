@@ -1,6 +1,8 @@
 package VIEW;
 
+import CONTROLLER.HangmanController;
 import CONTROLLER.HauptController;
+import CONTROLLER.QuizController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import MODEL.Statistics;
@@ -24,11 +26,11 @@ public class PlayMenu extends JFrameE {
 
         Button buttonFactory = new Button();
         JButton hangmanButton = buttonFactory.createButton("Hangman");
-        hangmanButton.setActionCommand("Hangman");
-        hangmanButton.addActionListener(controller);
+        hangmanButton.setActionCommand("StartHangman");
+        hangmanButton.addActionListener(controller);  // HauptController wird genutzt
 
         JButton quizButton = buttonFactory.createButton("Quiz");
-        quizButton.setActionCommand("Quiz");
+        quizButton.setActionCommand("StartQuiz");
         quizButton.addActionListener(controller);
 
         JButton backButton = buttonFactory.createButton("Back");
@@ -39,15 +41,14 @@ public class PlayMenu extends JFrameE {
         backgroundPanel.add(quizButton);
         backgroundPanel.add(backButton);
 
-        setLayout(null);
+        int windowWidth = getWidth();
+        int windowHeight = getHeight();
         int buttonWidth = 300;
         int buttonHeight = 40;
-        int centerX = (getWidth() - buttonWidth) / 2;
-        int centerY = (getHeight() - buttonHeight) / 2;
 
-        hangmanButton.setBounds(centerX, centerY - 80, buttonWidth, buttonHeight);
-        quizButton.setBounds(centerX, centerY - 20, buttonWidth, buttonHeight);
-        backButton.setBounds(centerX, centerY + 40, buttonWidth, buttonHeight);
+        hangmanButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
+        quizButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
+        backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
 
         setVisible(true);
     }
