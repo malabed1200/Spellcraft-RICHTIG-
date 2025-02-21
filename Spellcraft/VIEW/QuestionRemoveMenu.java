@@ -25,11 +25,11 @@ public class QuestionRemoveMenu extends JFrameE {
 
         // Buttons hinzufügen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("Remove");
+        JButton button1 = buttonFactory.createButton("ENTFERNEN");
         button1.setActionCommand("Remove");
         button1.addActionListener(controller);
 
-        JButton button2 = buttonFactory.createButton("Back");
+        JButton button2 = buttonFactory.createButton("ZURÜCK");
         button2.setActionCommand("Back");
         button2.addActionListener(controller);
 
@@ -38,7 +38,7 @@ public class QuestionRemoveMenu extends JFrameE {
         backgroundPanel.add(button2);
 
         // Erstellen des Textfeldes & JLabels
-        textField = new CustomTextField("Question Number");
+        textField = new CustomTextField("FRAGEN NUMMER");
         backgroundPanel.add(textField);
         textField.setEditable(true);
 
