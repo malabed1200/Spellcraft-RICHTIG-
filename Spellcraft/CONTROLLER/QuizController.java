@@ -15,7 +15,7 @@ public class QuizController implements ActionListener {
     private QuestionManager questionManager;
     private int currentQuestionIndex = 0;
 
-    public QuizController(Statistics statistics) {
+    public QuizController(HauptController hc, Statistics statistics) {
         this.statistics = statistics;
         this.questionManager = new QuestionManager();
         questionManager.loadQuestions();
@@ -23,8 +23,8 @@ public class QuizController implements ActionListener {
     }
 
     public void startGame() {
-        this.view = new QuizView(this); // Erstelle die Ansicht mit dem Controller
-        view.setQuestionText(getCurrentQuestionText()); // Setze die erste Frage
+        this.view = new QuizView(this);
+        view.setQuestionText(getCurrentQuestionText());
         view.setVisible(true);
     }
 
@@ -37,8 +37,8 @@ public class QuizController implements ActionListener {
                 checkAnswer();
                 break;
             case "Back":
-                view.dispose(); // Schließt das Quiz-Fenster
-                new HauptController(); // Startet MainMenu neu
+                view.dispose();
+                new HauptController();
                 break;
         }
     }
@@ -50,11 +50,12 @@ public class QuizController implements ActionListener {
         if (currentQuestion != null) {
             if (currentQuestion.checkAnswer(userAnswer)) {
                 JOptionPane.showMessageDialog(view, "Richtig!");
-                statistics.incrementCorrect();
+                statistics.incrementCorrect();  // SPEICHERT RICHTIGE ANTWORT
             } else {
                 JOptionPane.showMessageDialog(view, "Falsch! Die richtige Antwort war: " + currentQuestion.getCorrectAnswer());
-                statistics.incrementIncorrect();
+                statistics.incrementIncorrect();  // SPEICHERT FALSCHE ANTWORT
             }
+            statistics.save(); // SPEICHERT WERTE DAUERHAFT
             nextQuestion();
         }
     }

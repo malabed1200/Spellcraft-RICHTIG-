@@ -112,7 +112,7 @@ public class HauptController implements ActionListener {
 
     private void startHangman() {
         closeCurrentFrame();
-        new HangmanController(this);
+        new HangmanController(this, statistics);
     }
 
     private void startGuessThePic() {
@@ -122,7 +122,7 @@ public class HauptController implements ActionListener {
 
     private void startQuiz() {
         closeCurrentFrame();
-        new QuizController(statistics);
+        new QuizController(this, statistics); // Übergebe `statistics`
     }
 
     private void closeCurrentFrame() {
