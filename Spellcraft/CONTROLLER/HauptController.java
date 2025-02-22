@@ -30,33 +30,43 @@ public class HauptController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Play":
+                closeCurrentFrame();
                 openPlayMenu();
                 break;
             case "Stats":
+                closeCurrentFrame();
                 openStatistics();
                 break;
             case "Options":
+                closeCurrentFrame();
                 openOptionsMenu();
                 break;
             case "BackH":
+                closeCurrentFrame();
                 returnToMainMenu();
                 break;
             case "Back":
+                closeCurrentFrame();
                 returnToOptionsMenu();
                 break;
             case "Add Question":
+                closeCurrentFrame();
                 openQuestionAddMenu();
                 break;
             case "Remove Question":
+                closeCurrentFrame();
                 openQuestionRemoveMenu();
                 break;
             case "Hangman":
+                closeCurrentFrame();
                 startHangman();
                 break;
             case "GuessThePic":
+                closeCurrentFrame();
                 startGuessThePic();
                 break;
             case "Quiz":
+                closeCurrentFrame();
                 startQuiz();
                 break;
         }

@@ -24,7 +24,7 @@ public class QuizView extends JFrame {
         setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/QuizHinter.jpg");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
@@ -51,7 +51,7 @@ public class QuizView extends JFrame {
 
         // Zurück-Button
         backButton = buttonFactory.createButton("ZURÜCK");
-        backButton.setBounds(50, 500, 120, 40);
+        backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller); // Controller übernimmt die Steuerung
         backgroundPanel.add(backButton);

@@ -33,26 +33,26 @@ public class StatisticsView extends JFrameE {
         // Statistiken anzeigen
         JLabel correctLabel = new JLabel("Richtige Antworten: " + statistics.getCorrect());
         correctLabel.setForeground(Color.WHITE);
-        correctLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        correctLabel.setBounds(50, 50, 300, 30);
+        correctLabel.setFont(new Font("Arial", Font.BOLD, 35));
+        correctLabel.setBounds(50, 50, 400, 400);
 
         JLabel incorrectLabel = new JLabel("Falsche Antworten: " + statistics.getIncorrect());
         incorrectLabel.setForeground(Color.WHITE);
-        incorrectLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        incorrectLabel.setBounds(50, 100, 300, 30);
+        incorrectLabel.setFont(new Font("Arial", Font.BOLD, 35));
+        incorrectLabel.setBounds(50, 100, 400, 400);
 
         backgroundPanel.add(correctLabel);
         backgroundPanel.add(incorrectLabel);
 
         // Diagramm
         JPanel chartPanel = new PieChartPanel(statistics);
-        chartPanel.setBounds(450, 100, 250, 250);
+        chartPanel.setBounds(800, 200, 225, 225);
         backgroundPanel.add(chartPanel);
 
         // Zurück-Button unten links
         Button buttonFactory = new Button();
         backButton = buttonFactory.createButton("ZURÜCK");
-        backButton.setBounds(50, 500, 120, 40);
+        backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
         backgroundPanel.add(backButton);

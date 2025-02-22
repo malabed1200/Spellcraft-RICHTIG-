@@ -1,6 +1,7 @@
 package VIEW;
 
 import CONTROLLER.GuessThePicController;
+import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
 import VIEW.MORE.CustomTextField;
@@ -9,25 +10,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GuessThePic extends JFrame {
-
     private JTextField eingabe;
     private JPanel kreisPanel;
     private JPanel bildPanel;
     private JLabel bildLabel;
     private Color[] kreisFarben;
+    private JButton backButton;
 
-    public GuessThePic(GuessThePicController controller) {
+    public GuessThePic(GuessThePicController controller, HauptController hc) {
         setTitle("Guess the Pic");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(null);
 
         setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/cavewall.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/rattenBild.jpg");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
@@ -48,16 +47,18 @@ public class GuessThePic extends JFrame {
                 }
             }
         };
-        kreisPanel.setBounds(0, 0, 800, 50);
+        kreisPanel.setBounds(0, 0, 1350, 50);
         kreisFarben = new Color[10];
         for (int i = 0; i < kreisFarben.length; i++) {
             kreisFarben[i] = Color.WHITE; // Standard auf Weiß
         }
+        Color hexColor=new Color(0x67564C);
+        kreisPanel.setBackground( hexColor = Color.decode("0x67564C"));
         backgroundPanel.add(kreisPanel);
 
         // Panel für das Bild erstellen
         bildPanel = new JPanel(new BorderLayout());
-        bildPanel.setBounds(250, 100, 300, 300);
+        bildPanel.setBounds(500, 100, 300, 300);
         bildLabel = new JLabel();
         bildLabel.setHorizontalAlignment(JLabel.CENTER);
         bildLabel.setVerticalAlignment(JLabel.CENTER);
@@ -74,12 +75,22 @@ public class GuessThePic extends JFrame {
         eingabe = new CustomTextField("EINGABE");
         backgroundPanel.add(eingabe);
 
+        // Zurück-Button erstellen
+        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton.setBounds(5, 650, 500, 50);
+        backButton.setActionCommand("BackH");
+        backButton.addActionListener(e -> {
+            dispose(); // Schließt das aktuelle Fenster
+            new MainMenu(hc); // Öffnet das MainMenu
+        });
+        backgroundPanel.add(backButton);
+
         // Buttons hinzufügen
         backgroundPanel.add(guess);
 
         // Button-Positionierung
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
+        int windowWidth = 1300;
+        int windowHeight = 500;
         int buttonWidth = 300;
         int buttonHeight = 40;
 
