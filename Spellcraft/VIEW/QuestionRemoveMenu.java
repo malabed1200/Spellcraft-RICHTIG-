@@ -1,72 +1,62 @@
 package VIEW;
 
 import CONTROLLER.HauptController;
-import VIEW.MORE.*;
+import VIEW.MORE.BackgroundPanel;
+import VIEW.MORE.Button;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class QuestionRemoveMenu extends JFrameE {
     private JTextField textField;
 
     public QuestionRemoveMenu(HauptController controller) {
-        // Erstelle das Hauptfenster
         setTitle("Remove Question");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(null);
 
-        setLocationRelativeTo(null);
-
-        // Hintergrundpanel hinzufügen
-        //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
+        // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
-        backgroundPanel.setLayout(null); // Absolute Positionierung
+        backgroundPanel.setLayout(new GridBagLayout()); // Gleiche Struktur wie MainMenu
         setContentPane(backgroundPanel);
 
-        // Buttons hinzufügen
+        // Textfeld für Eingabe
+        textField = new JTextField(20);
+        textField.setHorizontalAlignment(JTextField.CENTER);
+
+        // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("ENTFERNEN");
-        button1.setActionCommand("Remove");
-        button1.addActionListener(controller);
+        JButton removeButton = buttonFactory.createButton("ENTFERNEN");
+        removeButton.setActionCommand("Remove");
+        removeButton.addActionListener(controller);
 
-        JButton button2 = buttonFactory.createButton("ZURÜCK");
-        button2.setActionCommand("Back");
-        button2.addActionListener(controller);
+        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        backButton.setActionCommand("Back");
+        backButton.addActionListener(controller);
 
-        // Buttons zum Hintergrund hinzufügen
-        backgroundPanel.add(button1);
-        backgroundPanel.add(button2);
+        // Panel für die Elemente
+        JPanel inputPanel = new JPanel(new GridLayout(3, 1, 0, 10));
+        inputPanel.setOpaque(false);
+        inputPanel.add(textField);
+        inputPanel.add(removeButton);
+        inputPanel.add(backButton);
 
-        // Erstellen des Textfeldes & JLabels
-        textField = new CustomTextField("FRAGEN NUMMER");
-        backgroundPanel.add(textField);
-        textField.setEditable(true);
+        // Alles in die Mitte positionieren
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        backgroundPanel.add(inputPanel, gbc);
 
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
-
-        int buttonWidth = 300;
-        int buttonHeight = 40;
-        int textFieldWidth = 300;
-        int textFieldHeight = 30;
-
-        // Textfeld unter den Buttons platzieren
-        textField.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 60, textFieldWidth, textFieldHeight);
-
-        // Buttons dynamisch zentrieren
-        button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-        button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 60, buttonWidth, buttonHeight);
-
-        // Frame anzeigen
         setVisible(true);
     }
 
-    public void updateTextAnswer(){
+    public void updateTextAnswer() {
         textField.setText("");
     }
 
-    public JTextField[] getTextfield(){
-        return new JTextField []{textField};
+    public JTextField[] getTextfield() {
+        return new JTextField[]{textField};
     }
 }
-

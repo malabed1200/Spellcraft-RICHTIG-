@@ -18,6 +18,8 @@ public class GuessThePic extends JFrame {
 
     public GuessThePic(GuessThePicController controller) {
         setTitle("Guess the Pic");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(null);

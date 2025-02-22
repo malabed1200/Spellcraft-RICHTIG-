@@ -6,6 +6,7 @@ import VIEW.MORE.Button;
 import MODEL.Statistics;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PlayMenu extends JFrameE {
     private Statistics statistics;
@@ -14,16 +15,16 @@ public class PlayMenu extends JFrameE {
         this.statistics = statistics;
 
         setTitle("Play Menu");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(null);
 
-        setLocationRelativeTo(null);
-
+        // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
-        backgroundPanel.setLayout(null);
+        backgroundPanel.setLayout(new GridBagLayout()); // Gleiche Struktur wie MainMenu
         setContentPane(backgroundPanel);
 
+        // Buttons erstellen
         Button buttonFactory = new Button();
         JButton hangmanButton = buttonFactory.createButton("HANGMAN");
         hangmanButton.setActionCommand("Hangman");
@@ -41,21 +42,20 @@ public class PlayMenu extends JFrameE {
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
 
-        backgroundPanel.add(hangmanButton);
-        backgroundPanel.add(quizButton);
-        backgroundPanel.add(guessButton);
-        backgroundPanel.add(backButton);
+        // Panel für die Buttons (gleiche Struktur wie in MainMenu)
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10)); // 4 Reihen, 1 Spalte, Abstand 10px
+        buttonPanel.setOpaque(false); // Hintergrund durchsichtig
+        buttonPanel.add(hangmanButton);
+        buttonPanel.add(quizButton);
+        buttonPanel.add(guessButton);
+        buttonPanel.add(backButton);
 
-        setLayout(null);
-        int buttonWidth = 300;
-        int buttonHeight = 40;
-        int centerX = (getWidth() - buttonWidth) / 2;
-        int centerY = (getHeight() - buttonHeight) / 2;
-
-        hangmanButton.setBounds(centerX, centerY - 80, buttonWidth, buttonHeight);
-        quizButton.setBounds(centerX, centerY - 20, buttonWidth, buttonHeight);
-        guessButton.setBounds(centerX, centerY + 40, buttonWidth, buttonHeight);
-        backButton.setBounds(centerX, centerY + 100, buttonWidth, buttonHeight);
+        // Buttons in der Mitte positionieren
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        backgroundPanel.add(buttonPanel, gbc);
 
         setVisible(true);
     }

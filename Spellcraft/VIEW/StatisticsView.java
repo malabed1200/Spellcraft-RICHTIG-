@@ -17,7 +17,10 @@ public class StatisticsView extends JFrameE {
 
         setTitle("Statistiken");
         setSize(800, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
         setLayout(new BorderLayout());
 
         setLocationRelativeTo(null);

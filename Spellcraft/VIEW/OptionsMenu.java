@@ -3,26 +3,24 @@ package VIEW;
 import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
-import MODEL.Statistics;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class OptionsMenu extends JFrameE {
 
     public OptionsMenu(HauptController controller) {
         setTitle("Options Menu");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(null);
 
-        setLocationRelativeTo(null);
-
-        // Hintergrundbild setzen
+        // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
-        backgroundPanel.setLayout(null);
+        backgroundPanel.setLayout(new GridBagLayout()); // Gleiche Struktur wie MainMenu
         setContentPane(backgroundPanel);
 
-        // Button Factory nutzen
+        // Buttons erstellen
         Button buttonFactory = new Button();
         JButton addQuestionButton = buttonFactory.createButton("FRAGE HINZUFÜGEN");
         addQuestionButton.setActionCommand("Add Question");
@@ -32,29 +30,28 @@ public class OptionsMenu extends JFrameE {
         removeQuestionButton.setActionCommand("Remove Question");
         removeQuestionButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("ZURÜCK"); // Umbenannter Button
+        JButton backButton = buttonFactory.createButton("ZURÜCK");
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
 
-        // Buttons hinzufügen
-        backgroundPanel.add(addQuestionButton);
-        backgroundPanel.add(removeQuestionButton);
-        backgroundPanel.add(backButton);
+        // Panel für die Buttons
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10)); // 3 Reihen, 1 Spalte, Abstand 10px
+        buttonPanel.setOpaque(false); // Hintergrund durchsichtig
+        buttonPanel.add(addQuestionButton);
+        buttonPanel.add(removeQuestionButton);
+        buttonPanel.add(backButton);
 
-        // Button-Positionierung
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
-        int buttonWidth = 300;
-        int buttonHeight = 40;
-
-        addQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 80, buttonWidth, buttonHeight);
-        removeQuestionButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 - 20, buttonWidth, buttonHeight);
-        backButton.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 40, buttonWidth, buttonHeight);
+        // Buttons in der Mitte positionieren
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        backgroundPanel.add(buttonPanel, gbc);
 
         setVisible(true);
     }
 
-    public void updateTextAnswer(){}
+    public void updateTextAnswer() {}
 
-    public JTextField[] getTextfield(){return null;}
+    public JTextField[] getTextfield() { return null; }
 }

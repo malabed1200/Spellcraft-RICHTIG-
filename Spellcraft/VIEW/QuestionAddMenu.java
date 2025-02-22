@@ -1,78 +1,67 @@
 package VIEW;
 
 import CONTROLLER.HauptController;
-import VIEW.MORE.*;
+import VIEW.MORE.BackgroundPanel;
+import VIEW.MORE.Button;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 public class QuestionAddMenu extends JFrameE {
-    private JTextField textField;
-    private JTextField textField1;
+    private JTextField questionField;
+    private JTextField answerField;
 
     public QuestionAddMenu(HauptController controller) {
-        // Erstelle das Hauptfenster
         setTitle("Add Question");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(null);
 
-        setLocationRelativeTo(null);
-
-        // Hintergrundpanel hinzufügen
-        //BackgroundPanel backgroundPanel = new BackgroundPanel("C:\\Users\\amira\\Downloads\\Bilder111.gif");
+        // Hintergrund setzen
         BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
-        backgroundPanel.setLayout(null); // Absolute Positionierung
+        backgroundPanel.setLayout(new GridBagLayout()); // Gleiche Struktur wie MainMenu
         setContentPane(backgroundPanel);
 
-        // Buttons hinzufügen
+        // Textfelder für Frage und Antwort
+        questionField = new JTextField(20);
+        answerField = new JTextField(20);
+        questionField.setHorizontalAlignment(JTextField.CENTER);
+        answerField.setHorizontalAlignment(JTextField.CENTER);
+
+        // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton button1 = buttonFactory.createButton("HINZUFÜGEN");
-        button1.setActionCommand("Add");
-        button1.addActionListener(controller);
+        JButton addButton = buttonFactory.createButton("HINZUFÜGEN");
+        addButton.setActionCommand("Add");
+        addButton.addActionListener(controller);
 
-        JButton button2 = buttonFactory.createButton("ZURÜCK");
-        button2.setActionCommand("Back");
-        button2.addActionListener(controller);
+        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        backButton.setActionCommand("Back");
+        backButton.addActionListener(controller);
 
-        // Buttons zum Hintergrund hinzufügen
-        backgroundPanel.add(button1);
-        backgroundPanel.add(button2);
+        // Panel für die Elemente
+        JPanel inputPanel = new JPanel(new GridLayout(4, 1, 0, 10));
+        inputPanel.setOpaque(false);
+        inputPanel.add(questionField);
+        inputPanel.add(answerField);
+        inputPanel.add(addButton);
+        inputPanel.add(backButton);
 
-        // Erstellen des Textfeldes & JLabels
-        textField = new CustomTextField("FRAGE");
-        backgroundPanel.add(textField);
+        // Alles in die Mitte positionieren
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        backgroundPanel.add(inputPanel, gbc);
 
-        // Erstellen des Textfeldes & JLabels
-        textField1 = new CustomTextField("ANTWORT");
-        backgroundPanel.add(textField1);
-
-        int windowWidth = getWidth();
-        int windowHeight = getHeight();
-
-        int buttonWidth = 300;
-        int buttonHeight = 40;
-        int textFieldWidth = 300;
-        int textFieldHeight = 30;
-
-        // Textfeld unter den Buttons platzieren
-        textField.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 90, textFieldWidth, textFieldHeight);
-        textField1.setBounds((windowWidth - textFieldWidth) / 2, (windowHeight - textFieldHeight) / 2 - 30, textFieldWidth, textFieldHeight);
-
-        // Buttons dynamisch zentrieren
-        button1.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 30, buttonWidth, buttonHeight);
-        button2.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 90, buttonWidth, buttonHeight);
-
-        // Frame anzeigen
         setVisible(true);
     }
 
-    public void updateTextAnswer(){
-        textField.setText("");
-        textField1.setText("");
+    public void updateTextAnswer() {
+        questionField.setText("");
+        answerField.setText("");
     }
 
-    public JTextField[] getTextfield(){
-        return new JTextField []{textField,textField1};
+    public JTextField[] getTextfield() {
+        return new JTextField[]{questionField, answerField};
     }
 }
