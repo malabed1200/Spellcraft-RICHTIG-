@@ -3,6 +3,7 @@ package VIEW;
 import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import VIEW.MORE.CustomTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +24,9 @@ public class QuestionAddMenu extends JFrameE {
         setContentPane(backgroundPanel);
 
         // Textfelder für Frage und Antwort
-        questionField = new JTextField(20);
-        answerField = new JTextField(20);
-        questionField.setHorizontalAlignment(JTextField.CENTER);
-        answerField.setHorizontalAlignment(JTextField.CENTER);
+        questionField = new CustomTextField("FRAGE");
+        answerField = new CustomTextField("ANTWORT");
+
 
         // Buttons erstellen
         Button buttonFactory = new Button();

@@ -9,10 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PlayMenu extends JFrameE {
-    private Statistics statistics;
-
-    public PlayMenu(HauptController controller, Statistics statistics) {
-        this.statistics = statistics;
+    public PlayMenu(HauptController controller) {
 
         setTitle("Play Menu");
         setExtendedState(JFrame.MAXIMIZED_BOTH);

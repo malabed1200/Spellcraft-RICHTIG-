@@ -9,6 +9,10 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
+    public String getQuestion() {
+        return "Q: "+questionText+"\nA: "+correctAnswer;
+    }
+
     public String getQuestionText() {  // **Diese Methode wird gebraucht!**
         return questionText;
     }

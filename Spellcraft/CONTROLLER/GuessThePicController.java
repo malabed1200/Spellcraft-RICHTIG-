@@ -27,7 +27,7 @@ public class GuessThePicController implements ActionListener {
         this.hc=hc;
 
         this.guessThePicModel = new GuessThePicModel();
-        this.guessThePic = new GuessThePic(this, hc);
+        this.guessThePic = new GuessThePic(this);
         this.guessThePic.setBild(guessThePicModel.getQuestion());
         addDocumentListener();
     }
@@ -56,6 +56,9 @@ public class GuessThePicController implements ActionListener {
                     guessThePic.dispose();
                     shutdown();
                 }
+                break;
+            case"BackH":
+                shutdown();
                 break;
         }
     }

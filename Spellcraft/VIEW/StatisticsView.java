@@ -9,11 +9,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StatisticsView extends JFrameE {
-    private Statistics statistics;
     private JButton backButton;
 
+    private PieChartPanel chartPanel;
+
+    private JLabel correctLabel,incorrectLabel;
+
+    private int richtig=0;
+    private int falsch=0;
+
     public StatisticsView(HauptController controller) {
-        this.statistics = new Statistics();
 
         setTitle("Statistiken");
         setSize(800, 600);
@@ -31,12 +36,12 @@ public class StatisticsView extends JFrameE {
         setContentPane(backgroundPanel);
 
         // Statistiken anzeigen
-        JLabel correctLabel = new JLabel("Richtige Antworten: " + statistics.getCorrect());
+        correctLabel = new JLabel("Richtige Antworten: " + richtig);
         correctLabel.setForeground(Color.WHITE);
         correctLabel.setFont(new Font("Arial", Font.BOLD, 35));
         correctLabel.setBounds(50, 50, 400, 400);
 
-        JLabel incorrectLabel = new JLabel("Falsche Antworten: " + statistics.getIncorrect());
+        incorrectLabel = new JLabel("Falsche Antworten: " + falsch);
         incorrectLabel.setForeground(Color.WHITE);
         incorrectLabel.setFont(new Font("Arial", Font.BOLD, 35));
         incorrectLabel.setBounds(50, 100, 400, 400);
@@ -45,7 +50,7 @@ public class StatisticsView extends JFrameE {
         backgroundPanel.add(incorrectLabel);
 
         // Diagramm
-        JPanel chartPanel = new PieChartPanel(statistics);
+        this.chartPanel = new PieChartPanel(richtig,falsch);
         chartPanel.setBounds(800, 200, 225, 225);
         backgroundPanel.add(chartPanel);
 
@@ -60,9 +65,12 @@ public class StatisticsView extends JFrameE {
         setVisible(true);
     }
 
-    private void goToPlayMenu() {
-        dispose(); // Schließt das Statistik-Fenster
-        new PlayMenu(new HauptController(), statistics); // Öffnet das PlayMenu
+    public void updateInt(int richtig, int falsch){
+        this.richtig=richtig;
+        this.falsch=falsch;
+        correctLabel.setText("Richtige Antworten: " + richtig);
+        incorrectLabel.setText("Falsch Antworten: " + falsch);
+        this.chartPanel.setCorrectIncorrect(richtig,falsch);
     }
 
     public void updateTextAnswer() {}
