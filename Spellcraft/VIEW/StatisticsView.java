@@ -31,7 +31,7 @@ public class StatisticsView extends JFrameE {
         setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/stat.jpg");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
@@ -39,19 +39,19 @@ public class StatisticsView extends JFrameE {
         correctLabel = new JLabel("Richtige Antworten: " + richtig);
         correctLabel.setForeground(Color.WHITE);
         correctLabel.setFont(new Font("Arial", Font.BOLD, 35));
-        correctLabel.setBounds(50, 50, 400, 400);
+        correctLabel.setBounds(50, 20, 400, 200);
 
         incorrectLabel = new JLabel("Falsche Antworten: " + falsch);
         incorrectLabel.setForeground(Color.WHITE);
         incorrectLabel.setFont(new Font("Arial", Font.BOLD, 35));
-        incorrectLabel.setBounds(50, 100, 400, 400);
+        incorrectLabel.setBounds(50, 60, 400, 200);
 
         backgroundPanel.add(correctLabel);
         backgroundPanel.add(incorrectLabel);
 
         // Diagramm
         this.chartPanel = new PieChartPanel(richtig,falsch);
-        chartPanel.setBounds(800, 200, 225, 225);
+        chartPanel.setBounds(120, 200, 225, 225);
         backgroundPanel.add(chartPanel);
 
         // Zurück-Button unten links
