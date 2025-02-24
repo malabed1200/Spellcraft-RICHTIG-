@@ -23,15 +23,15 @@ public class PlayMenu extends JFrameE {
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton hangmanButton = buttonFactory.createButton("Hangman");
+        JButton hangmanButton = buttonFactory.createButton("SpellMan");
         hangmanButton.setActionCommand("Hangman");
         hangmanButton.addActionListener(controller);
 
-        JButton quizButton = buttonFactory.createButton("Quiz");
+        JButton quizButton = buttonFactory.createButton("SpellQuiz");
         quizButton.setActionCommand("Quiz");
         quizButton.addActionListener(controller);
 
-        JButton guessButton = buttonFactory.createButton("Was ist das?");
+        JButton guessButton = buttonFactory.createButton("SpellGuess");
         guessButton.setActionCommand("GuessThePic");
         guessButton.addActionListener(controller);
 
