@@ -23,6 +23,7 @@ public class QuizController implements ActionListener {
         this.questionManager = new QuestionManager();
         questionManager.loadQuestions();
         startGame();
+        hc.shutdown();
     }
 
     public void startGame() {

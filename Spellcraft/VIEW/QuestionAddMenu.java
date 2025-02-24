@@ -53,7 +53,7 @@ public class QuestionAddMenu extends JFrameE {
         gbc.anchor = GridBagConstraints.CENTER;
         backgroundPanel.add(inputPanel, gbc);
 
-        setVisible(true);
+        setVisible(false);
     }
 
     public void updateTextAnswer() {

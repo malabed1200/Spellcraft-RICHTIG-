@@ -108,4 +108,8 @@ public class GuessThePicController implements ActionListener {
         sound=null;
         hc.startHC();
     }
+
+    public void shutdownM() {
+        hc.shutdown();
+    }
 }

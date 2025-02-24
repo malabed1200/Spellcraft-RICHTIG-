@@ -54,7 +54,7 @@ public class PlayMenu extends JFrameE {
         gbc.anchor = GridBagConstraints.CENTER;
         backgroundPanel.add(buttonPanel, gbc);
 
-        setVisible(true);
+        setVisible(false);
     }
 
     public void updateTextAnswer() {}

@@ -14,6 +14,16 @@ import java.awt.event.ActionListener;
 
 public class HauptController implements ActionListener {
     private JFrameE currentFrame;
+
+    private boolean visibility;
+
+    private JFrameE MainMenu=new MainMenu(this);
+    private JFrameE OptionsMenu=new OptionsMenu(this);
+    private JFrameE PlayMenu=new PlayMenu(this);
+    private JFrameE StatisticsView=new StatisticsView(this);
+    private JFrameE QuestionAddMenu=new QuestionAddMenu(this);
+    private JFrameE QuestionRemoveMenu=new QuestionRemoveMenu(this);
+
     private String addQu="";
     private String addAns="";
     private String index="-1";
@@ -30,7 +40,8 @@ public class HauptController implements ActionListener {
     }
 
     public void startHC(){
-        currentFrame = new MainMenu(this);
+        currentFrame = MainMenu;
+        currentFrame.setVisible(true);
         this.statistics = new Statistics();
     }
 
@@ -41,43 +52,50 @@ public class HauptController implements ActionListener {
         switch (e.getActionCommand()) {
             case "Play":
                 sound.playSound("s1");
-                currentFrame.dispose();
-                currentFrame = new PlayMenu(this);
+                currentFrame = PlayMenu;
+                currentFrame.setVisible(true);
+                MainMenu.setVisible(false);
                 break;
             case "Stats":
                 sound.playSound("s1");
-                currentFrame.dispose();
-                currentFrame = new StatisticsView(this);
+                currentFrame = StatisticsView;
                 currentFrame.updateInt(statistics.getCorrect(),statistics.getIncorrect());
+                currentFrame.setVisible(true);
+                MainMenu.setVisible(false);
                 break;
             case "Options":
                 sound.playSound("s1");
-                currentFrame.dispose();
-                currentFrame=new OptionsMenu(this);
+                currentFrame=OptionsMenu;
+                currentFrame.setVisible(true);
+                MainMenu.setVisible(false);
                 break;
             case "BackH":
                 sound.playSound("s1");
-                currentFrame.dispose();
-                currentFrame=new MainMenu(this);
+                currentFrame.setVisible(false);
+                currentFrame=MainMenu;
+                currentFrame.setVisible(true);
                 break;
             case "Back":
                 sound.playSound("s1");
-                currentFrame.dispose();
-                currentFrame=new OptionsMenu(this);
+                currentFrame.setVisible(false);
+                currentFrame=OptionsMenu;
+                currentFrame.setVisible(true);
                 questionManager.saveQuestions();
                 break;
             case "Add Question":
                 sound.playSound("s1");
                 questionManager=new QuestionManager();
-                currentFrame.dispose();
-                currentFrame=new QuestionAddMenu(this);
+                currentFrame=QuestionAddMenu;
+                currentFrame.setVisible(true);
+                OptionsMenu.setVisible(false);
                 addDocumentListenerQuAdd();
                 break;
             case "Remove Question":
                 sound.playSound("s1");
                 questionManager=new QuestionManager();
-                currentFrame.dispose();
-                currentFrame=new QuestionRemoveMenu(this);
+                currentFrame=QuestionRemoveMenu;
+                currentFrame.setVisible(true);
+                OptionsMenu.setVisible(false);
                 addDocumentListenerQuRemove();
                 break;
             case "Add":
@@ -96,22 +114,16 @@ public class HauptController implements ActionListener {
                 sound.playSound("s1");
                 new HangmanController(this);
                 statistics=null;
-                currentFrame.dispose();
-                currentFrame=null;
                 break;
             case "GuessThePic":
                 sound.playSound("s1");
                 new GuessThePicController(this);
                 statistics=null;
-                currentFrame.dispose();
-                currentFrame=null;
                 break;
             case "Quiz":
                 sound.playSound("s1");
                 new QuizController(this);
                 statistics=null;
-                currentFrame.dispose();
-                currentFrame=null;
                 break;
             case "Exit":
                 sound.playSound("s1");
@@ -179,6 +191,12 @@ public class HauptController implements ActionListener {
             }
         });
     }
+
+    public void shutdown() {
+        currentFrame.dispose();
+    }
+
+    public void setVisible(boolean a){this.visibility=a;}
 
     public void updateAddQu(JTextField textArea) {
         addQu = textArea.getText();

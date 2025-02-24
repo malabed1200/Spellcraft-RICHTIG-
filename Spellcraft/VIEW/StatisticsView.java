@@ -69,7 +69,7 @@ public class StatisticsView extends JFrameE {
         backgroundPanel.add(backButton);
 
 
-        setVisible(true);
+        setVisible(false);
     }
 
     public void updateInt(int richtig, int falsch){

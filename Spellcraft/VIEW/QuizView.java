@@ -3,6 +3,7 @@ package VIEW;
 import CONTROLLER.QuizController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import VIEW.MORE.CustomTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,19 +33,18 @@ public class QuizView extends JFrame {
         questionLabel = new JLabel("Lade Frage...", SwingConstants.CENTER);
         questionLabel.setForeground(Color.WHITE);
         questionLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        questionLabel.setBounds(50, 50, 700, 30);
+        questionLabel.setBounds(0, 50, 415, 30);
         backgroundPanel.add(questionLabel);
 
         // Eingabefeld für die Antwort
-        answerField = new JTextField();
-        answerField.setFont(new Font("Arial", Font.PLAIN, 18));
+        answerField = new CustomTextField("Antwort");
         answerField.setBounds(50, 100, 300, 40);
         backgroundPanel.add(answerField);
 
         // Absenden-Button
         Button buttonFactory = new Button();
         submitButton = buttonFactory.createButton("Mal sehen!");
-        submitButton.setBounds(50, 160, 120, 40);
+        submitButton.setBounds(50, 160, 300, 40);
         submitButton.setActionCommand("Submit");
         submitButton.addActionListener(controller); // Controller übernimmt die Steuerung
         backgroundPanel.add(submitButton);

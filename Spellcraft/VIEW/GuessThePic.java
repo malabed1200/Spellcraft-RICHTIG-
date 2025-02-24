@@ -95,6 +95,7 @@ public class GuessThePic extends JFrame {
         guess.setBounds((windowWidth - buttonWidth) / 2, (windowHeight - buttonHeight) / 2 + 240, buttonWidth, buttonHeight);
 
         setVisible(true);
+        controller.shutdownM();
     }
 
     public void updateTextAnswer() {

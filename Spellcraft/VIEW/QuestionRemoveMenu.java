@@ -49,7 +49,7 @@ public class QuestionRemoveMenu extends JFrameE {
         gbc.anchor = GridBagConstraints.CENTER;
         backgroundPanel.add(inputPanel, gbc);
 
-        setVisible(true);
+        setVisible(false);
     }
 
     public void updateTextAnswer() {

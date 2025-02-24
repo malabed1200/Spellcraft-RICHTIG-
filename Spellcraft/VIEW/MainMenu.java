@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainMenu extends JFrameE {
-
     public MainMenu(HauptController controller) {
         setTitle("SPELLCRAFT");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -53,7 +52,7 @@ public class MainMenu extends JFrameE {
         gbc.anchor = GridBagConstraints.CENTER;
         backgroundPanel.add(buttonPanel, gbc);
 
-        setVisible(true);
+        setVisible(false);
     }
 
     public void updateTextAnswer() {}

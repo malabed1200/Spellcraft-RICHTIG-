@@ -25,6 +25,7 @@ public class HangmanController implements ActionListener {
         this.model = new HangmanModel();
         this.statistics = new Statistics();
         startGame();
+        hc.shutdown();
     }
 
     public void startGame() {
