@@ -56,11 +56,18 @@ public class StatisticsView extends JFrameE {
 
         // Zurück-Button unten links
         Button buttonFactory = new Button();
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurücksetzen");
+        backButton.setBounds(5, 587, 500, 50);
+        backButton.setActionCommand("Reset");
+        backButton.addActionListener(controller);
+        backgroundPanel.add(backButton);
+
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
         backgroundPanel.add(backButton);
+
 
         setVisible(true);
     }

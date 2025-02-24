@@ -22,20 +22,21 @@ public class MainMenu extends JFrameE {
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton playButton = buttonFactory.createButton("SPIELEN");
+        JButton playButton = buttonFactory.createButton("Spielen");
         playButton.setActionCommand("Play");
         playButton.addActionListener(controller);
 
-        JButton statsButton = buttonFactory.createButton("STATISTIK");
+        JButton statsButton = buttonFactory.createButton("Statistik");
         statsButton.setActionCommand("Stats");
         statsButton.addActionListener(controller);
 
-        JButton optionsButton = buttonFactory.createButton("EINSTELLUNGEN");
+        JButton optionsButton = buttonFactory.createButton("Einstellungen");
         optionsButton.setActionCommand("Options");
         optionsButton.addActionListener(controller);
 
-        JButton exitButton = buttonFactory.createButton("SCHLIESSEN"); // Neuer Button
-        exitButton.addActionListener(e -> System.exit(0)); // Beendet das Programm
+        JButton exitButton = buttonFactory.createButton("Verlassen"); // Neuer Button
+        exitButton.setActionCommand("Exit"); // ActionCommand setzen
+        exitButton.addActionListener(controller); // Beendet das Programm
 
         // Panel für die Buttons
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10)); // 4 Reihen, 1 Spalte, Abstand 10px

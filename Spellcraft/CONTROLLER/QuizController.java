@@ -2,6 +2,7 @@ package CONTROLLER;
 
 import MODEL.Question;
 import MODEL.QuestionManager;
+import MODEL.Sound;
 import MODEL.Statistics;
 import VIEW.QuizView;
 
@@ -10,13 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class QuizController implements ActionListener {
-    private Statistics statistics;
+    private Statistics statistics=new Statistics();
     private QuizView view;
     private QuestionManager questionManager;
     private int currentQuestionIndex = 0;
+    private Sound sound = new Sound();
+    private HauptController hc;
 
-    public QuizController(HauptController hc, Statistics statistics) {
-        this.statistics = statistics;
+    public QuizController(HauptController hc) {
+        this.hc=hc;
         this.questionManager = new QuestionManager();
         questionManager.loadQuestions();
         startGame();
@@ -34,11 +37,13 @@ public class QuizController implements ActionListener {
 
         switch (command) {
             case "Submit":
+                sound.playSound("s1");
                 checkAnswer();
                 break;
             case "Back":
+                sound.playSound("s1");
                 view.dispose();
-                new HauptController();
+                hc.startHC();
                 break;
         }
     }
@@ -49,9 +54,11 @@ public class QuizController implements ActionListener {
 
         if (currentQuestion != null) {
             if (currentQuestion.checkAnswer(userAnswer)) {
+                sound.playSound("s2");
                 JOptionPane.showMessageDialog(view, "Richtig!");
                 statistics.incrementCorrect();  // SPEICHERT RICHTIGE ANTWORT
             } else {
+                sound.playSound("s4");
                 JOptionPane.showMessageDialog(view, "Falsch! Die richtige Antwort war: " + currentQuestion.getCorrectAnswer());
                 statistics.incrementIncorrect();  // SPEICHERT FALSCHE ANTWORT
             }
@@ -75,7 +82,10 @@ public class QuizController implements ActionListener {
 
     private String getCurrentQuestionText() {
         Question question = questionManager.getQuestion(currentQuestionIndex);
-        return (question != null) ? question.getQuestionText() : null;
+        if(question != null) {
+            return question.getQuestionText();
+        }
+        return null;
     }
 
     public void shutdown() {

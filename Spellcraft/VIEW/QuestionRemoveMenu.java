@@ -23,15 +23,15 @@ public class QuestionRemoveMenu extends JFrameE {
         setContentPane(backgroundPanel);
 
         // Textfeld für Eingabe
-        textField = new CustomTextField("NUMMER");
+        textField = new CustomTextField("Nummer");
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton removeButton = buttonFactory.createButton("ENTFERNEN");
+        JButton removeButton = buttonFactory.createButton("Entfernen");
         removeButton.setActionCommand("Remove");
         removeButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        JButton backButton = buttonFactory.createButton("Speichern und zurück");
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller);
 

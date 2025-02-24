@@ -1,5 +1,6 @@
 package CONTROLLER;
 
+import MODEL.Sound;
 import VIEW.HangmanView;
 import MODEL.HangmanModel;
 import MODEL.Statistics;
@@ -11,6 +12,8 @@ import java.awt.event.ActionListener;
 
 public class HangmanController implements ActionListener {
     HauptController hc;
+
+    Sound sound = new Sound();
 
     private HangmanModel model;
     private Statistics statistics;
@@ -36,6 +39,7 @@ public class HangmanController implements ActionListener {
 
         // Zurück-Button: Zurück ins PlayMenu
         if (command.equals("Back")) {
+            sound.playSound("s1");
             shutdown();
         }
 
@@ -58,11 +62,13 @@ public class HangmanController implements ActionListener {
 
     private void checkGameStatus() {
         if (model.isWin()) {
+            sound.playSound("s2");
             JOptionPane.showMessageDialog(view, "Glückwunsch! Du hast gewonnen!");
             statistics.incrementCorrect();
             statistics.save();
             resetGame();
         } else if (model.isGameOver()) {
+            sound.playSound("s3");
             JOptionPane.showMessageDialog(view, "Game Over! Das Wort war: " + model.getWord());
             statistics.incrementIncorrect();
             statistics.save();

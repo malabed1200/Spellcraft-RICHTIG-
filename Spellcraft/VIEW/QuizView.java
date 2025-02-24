@@ -43,14 +43,14 @@ public class QuizView extends JFrame {
 
         // Absenden-Button
         Button buttonFactory = new Button();
-        submitButton = buttonFactory.createButton("ABSENDEN");
+        submitButton = buttonFactory.createButton("Mal sehen!");
         submitButton.setBounds(50, 160, 120, 40);
         submitButton.setActionCommand("Submit");
         submitButton.addActionListener(controller); // Controller übernimmt die Steuerung
         backgroundPanel.add(submitButton);
 
         // Zurück-Button
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller); // Controller übernimmt die Steuerung

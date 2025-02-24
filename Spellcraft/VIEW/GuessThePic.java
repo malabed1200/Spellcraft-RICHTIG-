@@ -72,11 +72,11 @@ public class GuessThePic extends JFrame {
         guess.addActionListener(controller);
 
         // Erstellen des Textfeldes & JLabels
-        eingabe = new CustomTextField("EINGABE");
+        eingabe = new CustomTextField("Eingabe");
         backgroundPanel.add(eingabe);
 
         // Zurück-Button erstellen
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
