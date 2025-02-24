@@ -17,7 +17,7 @@ public class GuessThePic extends JFrame {
     private Color[] kreisFarben;
     private JButton backButton;
 
-    public GuessThePic(GuessThePicController controller, HauptController hc) {
+    public GuessThePic(GuessThePicController controller) {
         setTitle("Guess the Pic");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
@@ -26,7 +26,7 @@ public class GuessThePic extends JFrame {
         setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/rattenBild.jpg");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/baum.jpg");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
@@ -52,8 +52,8 @@ public class GuessThePic extends JFrame {
         for (int i = 0; i < kreisFarben.length; i++) {
             kreisFarben[i] = Color.WHITE; // Standard auf Weiß
         }
-        Color hexColor=new Color(0x67564C);
-        kreisPanel.setBackground( hexColor = Color.decode("0x67564C"));
+        Color hexColor=new Color(0x30ACAE);
+        kreisPanel.setBackground( hexColor = Color.decode("0x30ACAE"));
         backgroundPanel.add(kreisPanel);
 
         // Panel für das Bild erstellen
@@ -72,17 +72,14 @@ public class GuessThePic extends JFrame {
         guess.addActionListener(controller);
 
         // Erstellen des Textfeldes & JLabels
-        eingabe = new CustomTextField("EINGABE");
+        eingabe = new CustomTextField("Eingabe");
         backgroundPanel.add(eingabe);
 
         // Zurück-Button erstellen
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("BackH");
-        backButton.addActionListener(e -> {
-            dispose(); // Schließt das aktuelle Fenster
-            new MainMenu(hc); // Öffnet das MainMenu
-        });
+        backButton.addActionListener(controller);
         backgroundPanel.add(backButton);
 
         // Buttons hinzufügen

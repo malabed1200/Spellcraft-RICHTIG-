@@ -9,10 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PlayMenu extends JFrameE {
-    private Statistics statistics;
-
-    public PlayMenu(HauptController controller, Statistics statistics) {
-        this.statistics = statistics;
+    public PlayMenu(HauptController controller) {
 
         setTitle("Play Menu");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -26,19 +23,19 @@ public class PlayMenu extends JFrameE {
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton hangmanButton = buttonFactory.createButton("HANGMAN");
+        JButton hangmanButton = buttonFactory.createButton("Hangman");
         hangmanButton.setActionCommand("Hangman");
         hangmanButton.addActionListener(controller);
 
-        JButton quizButton = buttonFactory.createButton("QUIZ");
+        JButton quizButton = buttonFactory.createButton("Quiz");
         quizButton.setActionCommand("Quiz");
         quizButton.addActionListener(controller);
 
-        JButton guessButton = buttonFactory.createButton("ERRATE DAS BILD");
+        JButton guessButton = buttonFactory.createButton("Was ist das?");
         guessButton.setActionCommand("GuessThePic");
         guessButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        JButton backButton = buttonFactory.createButton("Zurück");
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
 

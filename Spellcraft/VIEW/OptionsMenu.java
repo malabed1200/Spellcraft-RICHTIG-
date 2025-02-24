@@ -22,15 +22,15 @@ public class OptionsMenu extends JFrameE {
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton addQuestionButton = buttonFactory.createButton("FRAGE HINZUFÜGEN");
+        JButton addQuestionButton = buttonFactory.createButton("Fragen hinzufügen");
         addQuestionButton.setActionCommand("Add Question");
         addQuestionButton.addActionListener(controller);
 
-        JButton removeQuestionButton = buttonFactory.createButton("FRAGE ENTFERNEN");
+        JButton removeQuestionButton = buttonFactory.createButton("Frage entfernen");
         removeQuestionButton.setActionCommand("Remove Question");
         removeQuestionButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        JButton backButton = buttonFactory.createButton("Zurück");
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
 

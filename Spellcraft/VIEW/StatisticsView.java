@@ -9,11 +9,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StatisticsView extends JFrameE {
-    private Statistics statistics;
     private JButton backButton;
 
+    private PieChartPanel chartPanel;
+
+    private JLabel correctLabel,incorrectLabel;
+
+    private int richtig=0;
+    private int falsch=0;
+
     public StatisticsView(HauptController controller) {
-        this.statistics = new Statistics();
 
         setTitle("Statistiken");
         setSize(800, 600);
@@ -26,43 +31,53 @@ public class StatisticsView extends JFrameE {
         setLocationRelativeTo(null);
 
         // Hintergrundbild setzen
-        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/Background_Dirt.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("Spellcraft/Bilder/stat.jpg");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
 
         // Statistiken anzeigen
-        JLabel correctLabel = new JLabel("Richtige Antworten: " + statistics.getCorrect());
+        correctLabel = new JLabel("Richtige Antworten: " + richtig);
         correctLabel.setForeground(Color.WHITE);
         correctLabel.setFont(new Font("Arial", Font.BOLD, 35));
-        correctLabel.setBounds(50, 50, 400, 400);
+        correctLabel.setBounds(50, 20, 400, 200);
 
-        JLabel incorrectLabel = new JLabel("Falsche Antworten: " + statistics.getIncorrect());
+        incorrectLabel = new JLabel("Falsche Antworten: " + falsch);
         incorrectLabel.setForeground(Color.WHITE);
         incorrectLabel.setFont(new Font("Arial", Font.BOLD, 35));
-        incorrectLabel.setBounds(50, 100, 400, 400);
+        incorrectLabel.setBounds(50, 60, 400, 200);
 
         backgroundPanel.add(correctLabel);
         backgroundPanel.add(incorrectLabel);
 
         // Diagramm
-        JPanel chartPanel = new PieChartPanel(statistics);
-        chartPanel.setBounds(800, 200, 225, 225);
+        this.chartPanel = new PieChartPanel(richtig,falsch);
+        chartPanel.setBounds(120, 200, 225, 225);
         backgroundPanel.add(chartPanel);
 
         // Zurück-Button unten links
         Button buttonFactory = new Button();
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurücksetzen");
+        backButton.setBounds(5, 587, 500, 50);
+        backButton.setActionCommand("Reset");
+        backButton.addActionListener(controller);
+        backgroundPanel.add(backButton);
+
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setBounds(5, 650, 500, 50);
         backButton.setActionCommand("BackH");
         backButton.addActionListener(controller);
         backgroundPanel.add(backButton);
 
+
         setVisible(true);
     }
 
-    private void goToPlayMenu() {
-        dispose(); // Schließt das Statistik-Fenster
-        new PlayMenu(new HauptController(), statistics); // Öffnet das PlayMenu
+    public void updateInt(int richtig, int falsch){
+        this.richtig=richtig;
+        this.falsch=falsch;
+        correctLabel.setText("Richtige Antworten: " + richtig);
+        incorrectLabel.setText("Falsch Antworten: " + falsch);
+        this.chartPanel.setCorrectIncorrect(richtig,falsch);
     }
 
     public void updateTextAnswer() {}

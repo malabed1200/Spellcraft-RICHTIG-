@@ -3,6 +3,7 @@ package VIEW;
 import CONTROLLER.HauptController;
 import VIEW.MORE.BackgroundPanel;
 import VIEW.MORE.Button;
+import VIEW.MORE.CustomTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,16 +23,15 @@ public class QuestionRemoveMenu extends JFrameE {
         setContentPane(backgroundPanel);
 
         // Textfeld für Eingabe
-        textField = new JTextField(20);
-        textField.setHorizontalAlignment(JTextField.CENTER);
+        textField = new CustomTextField("Nummer");
 
         // Buttons erstellen
         Button buttonFactory = new Button();
-        JButton removeButton = buttonFactory.createButton("ENTFERNEN");
+        JButton removeButton = buttonFactory.createButton("Entfernen");
         removeButton.setActionCommand("Remove");
         removeButton.addActionListener(controller);
 
-        JButton backButton = buttonFactory.createButton("ZURÜCK");
+        JButton backButton = buttonFactory.createButton("Speichern und zurück");
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller);
 

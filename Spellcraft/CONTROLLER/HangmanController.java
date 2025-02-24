@@ -1,8 +1,9 @@
 package CONTROLLER;
 
+import MODEL.Sound;
+import VIEW.HangmanView;
 import MODEL.HangmanModel;
 import MODEL.Statistics;
-import VIEW.HangmanView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,16 +11,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HangmanController implements ActionListener {
-    private HauptController hc;
+    HauptController hc;
+
+    Sound sound = new Sound();
+
     private HangmanModel model;
     private Statistics statistics;
     private HangmanView view;
 
-    public HangmanController(HauptController hc, Statistics statistics) {
-        this.hc = hc;
-        this.model = new HangmanModel();
-        this.statistics = statistics;
+    public HangmanController(HauptController hc) {
+        this.hc=hc;
 
+        this.model = new HangmanModel();
+        this.statistics = new Statistics();
         startGame();
     }
 
@@ -35,6 +39,7 @@ public class HangmanController implements ActionListener {
 
         // Zurück-Button: Zurück ins PlayMenu
         if (command.equals("Back")) {
+            sound.playSound("s1");
             shutdown();
         }
 
@@ -47,26 +52,24 @@ public class HangmanController implements ActionListener {
 
     private void processGuess(char letter, JButton button) {
         boolean correct = model.guessLetter(letter);
-        button.setBackground(correct ? Color.GREEN : Color.RED);
+        button.setBackground(correct ? java.awt.Color.GREEN : java.awt.Color.RED);
         button.setEnabled(false);
-
-        if (!correct) {
-            view.updateView("TIERE - " + model.getMaskedWord(), 1);
-        } else {
-            view.updateView("TIERE - " + model.getMaskedWord(), 0);
-        }
-
+        int a=0;
+        if(!correct){a=1;}
+        view.updateView("TIERE - " + model.getMaskedWord(),a);
         checkGameStatus();
     }
 
     private void checkGameStatus() {
         if (model.isWin()) {
-            JOptionPane.showMessageDialog(view, "Glückwunsch! Du hast gewonnen!", "Spiel beendet", JOptionPane.INFORMATION_MESSAGE);
+            sound.playSound("s2");
+            JOptionPane.showMessageDialog(view, "Glückwunsch! Du hast gewonnen!");
             statistics.incrementCorrect();
             statistics.save();
             resetGame();
         } else if (model.isGameOver()) {
-            JOptionPane.showMessageDialog(view, "Game Over! Das Wort war: " + model.getWord(), "Spiel beendet", JOptionPane.INFORMATION_MESSAGE);
+            sound.playSound("s3");
+            JOptionPane.showMessageDialog(view, "Game Over! Das Wort war: " + model.getWord());
             statistics.incrementIncorrect();
             statistics.save();
             resetGame();
@@ -83,6 +86,7 @@ public class HangmanController implements ActionListener {
         }
         model = null;
         view = null;
+        statistics=null;
         hc.startHC();
     }
 }

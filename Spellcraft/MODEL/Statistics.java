@@ -47,6 +47,12 @@ public class Statistics {
         }
     }
 
+    public void reset() {
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        count = 0;
+        save();
+    }
 
     public void incrementCorrect() {
         correctAnswers++;

@@ -39,7 +39,7 @@ public class HangmanView extends JFrame {
 
         // Zurück-Button
         Button buttonFactory = new Button();
-        backButton = buttonFactory.createButton("ZURÜCK");
+        backButton = buttonFactory.createButton("Zurück");
         backButton.setPreferredSize(new Dimension(100, 30));
         backButton.setActionCommand("Back");
         backButton.addActionListener(controller);

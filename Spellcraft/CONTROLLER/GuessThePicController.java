@@ -1,6 +1,7 @@
 package CONTROLLER;
 
 import MODEL.GuessThePicModel;
+import MODEL.Sound;
 import MODEL.Statistics;
 import VIEW.GuessThePic;
 
@@ -15,6 +16,8 @@ import java.awt.event.ActionListener;
 public class GuessThePicController implements ActionListener {
     private HauptController hc;
 
+    private Sound sound=new Sound();
+
     private GuessThePic guessThePic;
     private GuessThePicModel guessThePicModel;
 
@@ -27,8 +30,12 @@ public class GuessThePicController implements ActionListener {
         this.hc=hc;
 
         this.guessThePicModel = new GuessThePicModel();
-        this.guessThePic = new GuessThePic(this, hc);
-        this.guessThePic.setBild(guessThePicModel.getQuestion());
+        this.guessThePic = new GuessThePic(this);
+        String a;
+        do{
+            a=guessThePicModel.getQuestion();
+            this.guessThePic.setBild(a);
+        }while(a==null);
         addDocumentListener();
     }
 
@@ -38,12 +45,12 @@ public class GuessThePicController implements ActionListener {
             case "Guess":
                 boolean a=guessThePicModel.istRichtig(answer);
                 if(a) {
-                    JOptionPane.showMessageDialog(guessThePic, "Die Antwort ist Richtig", "Richtig",JOptionPane.INFORMATION_MESSAGE);
+                    sound.playSound("s2");
                     guessThePic.setKreisFarbe(richtig+falsch,new Color(43, 255, 0));
                     richtig++;
                 }
                 else {
-                    JOptionPane.showMessageDialog(guessThePic, "Die Antwort ist Falsch", "Falsch",JOptionPane.ERROR_MESSAGE);
+                    sound.playSound("s4");
                     guessThePic.setKreisFarbe(richtig+falsch,new Color(255, 0, 0));
                     falsch++;
                 }
@@ -56,6 +63,10 @@ public class GuessThePicController implements ActionListener {
                     guessThePic.dispose();
                     shutdown();
                 }
+                break;
+            case"BackH":
+                sound.playSound("s1");
+                shutdown();
                 break;
         }
     }
@@ -94,6 +105,7 @@ public class GuessThePicController implements ActionListener {
         }
         guessThePic = null;
         guessThePicModel = null;
+        sound=null;
         hc.startHC();
     }
 }
