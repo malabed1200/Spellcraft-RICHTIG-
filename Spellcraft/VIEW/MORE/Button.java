@@ -22,7 +22,7 @@ public class Button {
     public JButton createButton(String txt) {
         // Minecraft-Schriftart laden oder Fallback verwenden
         Font minecraftFont = loadMinecraftFont();
-
+ 
         // Erstelle den Button und setze die Schriftart
         JButton button = new JButton(txt);
         button.setFont(minecraftFont);
