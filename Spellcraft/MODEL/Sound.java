@@ -9,8 +9,10 @@ public class Sound implements LineListener {
     private String music="Spellcraft/Sounds/Music/";
     private Clip clip;
 
+    //1=click, 2=correct, 3=Dead, 4=wrong
+
     public void playSound(String name) {
-        String pfad="";
+        String pfad;
 
         if(name.charAt(0)=='s'){
             pfad=sfx+name.charAt(1)+".wav";
@@ -31,10 +33,6 @@ public class Sound implements LineListener {
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
-    }
-
-    public void stopSound() {
-        clip.stop();
     }
 
     public void playMusic(){

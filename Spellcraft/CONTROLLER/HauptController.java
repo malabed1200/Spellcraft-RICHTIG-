@@ -8,14 +8,11 @@ import VIEW.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HauptController implements ActionListener {
     private JFrameE currentFrame;
-
-    private boolean visibility;
 
     private JFrameE MainMenu=new MainMenu(this);
     private JFrameE OptionsMenu=new OptionsMenu(this);
@@ -195,8 +192,6 @@ public class HauptController implements ActionListener {
     public void shutdown() {
         currentFrame.dispose();
     }
-
-    public void setVisible(boolean a){this.visibility=a;}
 
     public void updateAddQu(JTextField textArea) {
         addQu = textArea.getText();
